@@ -88,7 +88,17 @@ class HomePage extends GetView<HomeController> {
 
   // 推荐歌单
   Widget _buildRecommendList() {
-    return <Widget>[]
+    return <Widget>[
+      for (var i = 0; i < controller.recommendSongs.length; i++)
+        SongListWidget(
+          imgUrl: controller.recommendSongs[i].picUrl!,
+          text: controller.recommendSongs[i].name!,
+          playCount: NumberTranslate(controller.recommendSongs[i].playCount!)
+              .translate(),
+          onTap: controller.onRecommendTap,
+          onPlay: controller.onRecommendPlay,
+        )
+    ]
         .toListView(
           scrollDirection: Axis.horizontal,
         )

@@ -12,4 +12,19 @@ class MusicApi {
     }
     return swipers;
   }
+
+  // 获取推荐歌单
+  static Future<List<SongListModel>> songList() async {
+    var res = await DioService.to.get(
+      '/personalized',
+      params: {
+        "limit": 6,
+      },
+    );
+    List<SongListModel> songLists = [];
+    for (var item in res.data['result']) {
+      songLists.add(SongListModel.fromJson(item));
+    }
+    return songLists;
+  }
 }

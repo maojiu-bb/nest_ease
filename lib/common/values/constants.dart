@@ -11,4 +11,7 @@ class Constants {
 
   // 轮播图
   static const storageBanner = 'banner';
+
+  // 推荐歌单
+  static const storageRecommendSongList = 'recommend_song_list';
 }

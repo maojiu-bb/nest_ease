@@ -87,7 +87,7 @@ class HomeController extends GetxController {
     recommendNewSongs = stringRecommendNewSongs != " "
         ? jsonDecode(stringRecommendNewSongs).map<SongsModel>((item) {
             return SongsModel.fromJson(item);
-          })
+          }).toList()
         : [];
   }
 

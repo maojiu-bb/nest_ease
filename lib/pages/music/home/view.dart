@@ -110,7 +110,15 @@ class HomePage extends GetView<HomeController> {
 
   // 推荐歌曲
   Widget _buildRecommendSongs() {
-    return <Widget>[].toColumn().sliverToBoxAdapter();
+    return <Widget>[
+      const NewSongWidget(
+        image:
+            'http://p1.music.126.net/CDhYcShQKH2VAMENuCxWWQ==/109951164166513349.jpg',
+        name: '泡沫',
+        author: '猫九',
+        album: 'skr',
+      ),
+    ].toColumn().sliverToBoxAdapter();
   }
 
   // 主视图

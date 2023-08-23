@@ -37,6 +37,14 @@ class RoutePages {
       page: () => const RadioIndexPage(),
     ),
     GetPage(
+      name: RouteNames.searchSearchFilter,
+      page: () => const SearchFilterPage(),
+    ),
+    GetPage(
+      name: RouteNames.searchSearchIndex,
+      page: () => const SearchIndexPage(),
+    ),
+    GetPage(
       name: RouteNames.systemLogin,
       page: () => const LoginPage(),
     ),

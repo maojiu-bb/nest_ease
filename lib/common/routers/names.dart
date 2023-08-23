@@ -6,6 +6,8 @@ class RouteNames {
   static const musicMusicList = '/music_music_list';
   static const radioRadioDetail = '/radio_radio_detail';
   static const radioRadioIndex = '/radio_radio_index';
+  static const searchSearchFilter = '/search_search_filter';
+  static const searchSearchIndex = '/search_search_index';
   static const systemLogin = '/system_login';
   static const systemMain = '/system_main';
   static const systemSplash = '/system_splash';

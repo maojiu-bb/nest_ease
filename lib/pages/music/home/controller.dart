@@ -36,6 +36,11 @@ class HomeController extends GetxController {
     ),
   ];
 
+  // appbar 点击
+  void onAppBarTap() {
+    Get.toNamed(RouteNames.searchSearchIndex);
+  }
+
   // 轮播图切换
   void onChangeBanner(int index, /*CarouselPageChangedReason*/ reason) {
     swiperCurrentIndex = index;

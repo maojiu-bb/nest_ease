@@ -22,7 +22,7 @@ class HomePage extends GetView<HomeController> {
         // 提示文字，多语言
         hintText: '发现新音乐',
         // 点击事件
-        // onTap: controller.onAppBarTap,
+        onTap: controller.onAppBarTap,
         // 只读
         readOnly: true,
       ),

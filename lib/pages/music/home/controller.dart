@@ -39,6 +39,9 @@ class HomeController extends GetxController {
   // 推荐歌单
   List<SongListModel> recommendSongs = [];
 
+  // 推荐歌曲
+  List<SongsModel> recommendNewSongs = [];
+
   // appbar 点击
   void onAppBarTap() {
     Get.toNamed(RouteNames.searchSearchIndex);
@@ -62,18 +65,29 @@ class HomeController extends GetxController {
   // 读取缓存
   Future<void> _loadCache() async {
     var stringSwiper = Storage().getString(Constants.storageBanner);
+
     var stringRecommendSongList =
         Storage().getString(Constants.storageRecommendSongList);
+
+    var stringRecommendNewSongs =
+        Storage().getString(Constants.storageRecommendSong);
 
     swiperItems = stringSwiper != " "
         ? jsonDecode(stringSwiper).map<KeyValueModel>((item) {
             return KeyValueModel.fromJson(item);
           }).toList()
         : [];
+
     recommendSongs = stringRecommendSongList != " "
         ? jsonDecode(stringRecommendSongList).map<SongListModel>((item) {
             return SongListModel.fromJson(item);
           }).toList()
+        : [];
+
+    recommendNewSongs = stringRecommendNewSongs != " "
+        ? jsonDecode(stringRecommendNewSongs).map<SongsModel>((item) {
+            return SongsModel.fromJson(item);
+          })
         : [];
   }
 
@@ -91,10 +105,15 @@ class HomeController extends GetxController {
     // 获取推荐歌单
     recommendSongs = await MusicApi.songList();
 
+    // 获取推荐歌曲
+    recommendNewSongs = await MusicApi.songs();
+
     // 离线存储
     Storage().setJson(Constants.storageBanner, swiperItems);
 
     Storage().setJson(Constants.storageRecommendSongList, recommendSongs);
+
+    Storage().setJson(Constants.storageRecommendSong, recommendNewSongs);
 
     update(["home"]);
   }

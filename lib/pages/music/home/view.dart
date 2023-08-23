@@ -104,8 +104,13 @@ class HomePage extends GetView<HomeController> {
         )
         .height(160)
         .paddingHorizontal(AppSpace.listItem)
-        .paddingVertical(AppSpace.listRow)
+        .paddingVertical(AppSpace.page)
         .sliverToBoxAdapter();
+  }
+
+  // 推荐歌曲
+  Widget _buildRecommendSongs() {
+    return <Widget>[].toColumn().sliverToBoxAdapter();
   }
 
   // 主视图
@@ -126,6 +131,15 @@ class HomePage extends GetView<HomeController> {
         ).sliverToBoxAdapter(),
         // 歌单列表
         _buildRecommendList(),
+
+        // 推荐歌曲
+        // 标题
+        TitleWidget.refresh(
+          title: '推荐歌曲',
+          onTap: () => print('tap'),
+        ).sliverToBoxAdapter(),
+        // 歌曲列表
+        _buildRecommendSongs(),
       ],
     );
   }

@@ -27,4 +27,16 @@ class MusicApi {
     }
     return songLists;
   }
+
+  // 获取推荐音乐
+  static Future<List<SongsModel>> songs() async {
+    var res = await DioService.to.get(
+      '/personalized/newsong',
+    );
+    List<SongsModel> songs = [];
+    for (var item in res.data['result']) {
+      songs.add(SongsModel.fromJson(item));
+    }
+    return songs;
+  }
 }

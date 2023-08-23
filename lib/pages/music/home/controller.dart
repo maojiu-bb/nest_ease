@@ -16,7 +16,7 @@ class HomeController extends GetxController {
   List<CategoryModel> categoryItems = [
     CategoryModel(
       id: 1,
-      name: '推荐歌单',
+      name: '每日推荐',
       image: AssetsSvgs.gedanSvg,
     ),
     CategoryModel(

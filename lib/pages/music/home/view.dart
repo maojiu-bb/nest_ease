@@ -86,6 +86,18 @@ class HomePage extends GetView<HomeController> {
     );
   }
 
+  // 推荐歌单
+  Widget _buildRecommendList() {
+    return <Widget>[]
+        .toListView(
+          scrollDirection: Axis.horizontal,
+        )
+        .height(160)
+        .paddingHorizontal(AppSpace.listItem)
+        .paddingVertical(AppSpace.listRow)
+        .sliverToBoxAdapter();
+  }
+
   // 主视图
   Widget _buildView() {
     return CustomScrollView(
@@ -102,6 +114,8 @@ class HomePage extends GetView<HomeController> {
           title: '推荐歌单',
           onTap: () => print('tap'),
         ).sliverToBoxAdapter(),
+        // 歌单列表
+        _buildRecommendList(),
       ],
     );
   }

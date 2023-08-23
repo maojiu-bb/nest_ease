@@ -34,11 +34,6 @@ class HomeController extends GetxController {
       name: '排行',
       image: AssetsSvgs.paihangbangSvg,
     ),
-    CategoryModel(
-      id: 5,
-      name: '电台',
-      image: AssetsSvgs.diantaiSvg,
-    )
   ];
 
   // 轮播图切换

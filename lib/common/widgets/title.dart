@@ -13,6 +13,9 @@ class TitleWidget extends StatelessWidget {
   // 标题
   final String title;
 
+  // 标题大小
+  final double? titleSize;
+
   // 右侧图标
   final Widget icon;
 
@@ -33,6 +36,7 @@ class TitleWidget extends StatelessWidget {
     required this.type,
     this.onTap,
     this.onRefresh,
+    this.titleSize,
   }) : super(key: key);
 
   // 基本 title
@@ -44,6 +48,7 @@ class TitleWidget extends StatelessWidget {
     this.leftIcon,
     this.onTap,
     this.onRefresh,
+    this.titleSize,
   }) : icon = const Icon(
           Icons.arrow_forward_ios,
           size: 14,
@@ -59,6 +64,7 @@ class TitleWidget extends StatelessWidget {
     Widget? leftIcon,
     this.onTap,
     this.onRefresh,
+    this.titleSize,
   })  : icon = const Icon(
           Icons.arrow_forward_ios,
           size: 14,
@@ -84,8 +90,8 @@ class TitleWidget extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10),
         child: Text(
           title,
-          style: const TextStyle(
-            fontSize: 16,
+          style: TextStyle(
+            fontSize: titleSize ?? 17,
             fontWeight: FontWeight.w500,
           ),
         ),

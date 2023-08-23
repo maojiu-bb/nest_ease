@@ -92,8 +92,16 @@ class HomePage extends GetView<HomeController> {
       slivers: [
         // 轮播图
         _buildBanner(),
+
         // 图标按钮
         _buildIconButtons(),
+
+        // 推荐歌单
+        // 标题
+        TitleWidget.primary(
+          title: '推荐歌单',
+          onTap: () => print('tap'),
+        ).sliverToBoxAdapter(),
       ],
     );
   }

@@ -27,6 +27,9 @@ class NewSongWidget extends StatelessWidget {
   // 专辑尺寸
   final double? albumSize;
 
+  // 点击事件
+  final VoidCallback onTap;
+
   const NewSongWidget({
     Key? key,
     required this.image,
@@ -37,6 +40,7 @@ class NewSongWidget extends StatelessWidget {
     this.nameSize,
     this.authorSize,
     this.albumSize,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -58,7 +62,8 @@ class NewSongWidget extends StatelessWidget {
         TextWidget.title3(
           name,
           size: nameSize ?? 15,
-        ),
+          overflow: TextOverflow.ellipsis,
+        ).tight(width: 180),
 
         const SizedBox(height: 10),
 
@@ -68,6 +73,7 @@ class NewSongWidget extends StatelessWidget {
           TextWidget.body2(
             author,
             size: authorSize ?? 12,
+            overflow: TextOverflow.ellipsis,
           ),
 
           const SizedBox(width: 10),
@@ -76,13 +82,23 @@ class NewSongWidget extends StatelessWidget {
           TextWidget.body2(
             album,
             size: albumSize ?? 12,
-          ),
+            overflow: TextOverflow.ellipsis,
+          ).tight(width: 100),
         ].toRow(),
-      ].toColumn(),
+      ].toColumn(
+        crossAxisAlignment: CrossAxisAlignment.start,
+      ),
     ]
         .toRow(
           mainAxisAlignment: MainAxisAlignment.start,
         )
-        .tight(width: 280);
+        .paddingHorizontal(
+          AppSpace.listView,
+        )
+        .paddingVertical(
+          AppSpace.listView,
+        )
+        .tight(width: 280)
+        .onTap(onTap);
   }
 }

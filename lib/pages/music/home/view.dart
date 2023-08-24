@@ -95,8 +95,8 @@ class HomePage extends GetView<HomeController> {
           text: controller.recommendSongs[i].name!,
           playCount: NumberTranslate(controller.recommendSongs[i].playCount!)
               .translate(),
-          onTap: controller.onRecommendTap,
-          onPlay: controller.onRecommendPlay,
+          onTap: controller.onRecommendSongListTap,
+          onPlay: controller.onRecommendSongListPlay,
         )
     ]
         .toListView(
@@ -111,14 +111,30 @@ class HomePage extends GetView<HomeController> {
   // 推荐歌曲
   Widget _buildRecommendSongs() {
     return <Widget>[
-      const NewSongWidget(
-        image:
-            'http://p1.music.126.net/CDhYcShQKH2VAMENuCxWWQ==/109951164166513349.jpg',
-        name: '泡沫',
-        author: '猫九',
-        album: 'skr',
-      ),
-    ].toColumn().sliverToBoxAdapter();
+      for (var i = 0; i < (controller.recommendNewSongs.length / 3).ceil(); i++)
+        <Widget>[
+          for (var j = i * 3; j < i * 3 + 3; j++)
+            if (j < controller.recommendNewSongs.length)
+              NewSongWidget(
+                image: controller.recommendNewSongs[j].picUrl!,
+                name: controller.recommendNewSongs[j].name!,
+                author: controller.recommendNewSongs[j].song!.artists![0].name!,
+                album: controller.recommendNewSongs[j].song!.album!.name!,
+                onTap: controller.onRecommendNewSongsTap,
+              )
+            else
+              Container(), // 如果超出了列表长度，在这里使用一个空的容器
+        ].toColumn(
+          mainAxisAlignment: MainAxisAlignment.start,
+        ),
+    ]
+        .toListView(
+          scrollDirection: Axis.horizontal,
+        )
+        .height(260)
+        .paddingVertical(AppSpace.page)
+        .paddingHorizontal(AppSpace.listItem)
+        .sliverToBoxAdapter();
   }
 
   // 主视图
@@ -135,7 +151,7 @@ class HomePage extends GetView<HomeController> {
         // 标题
         TitleWidget.primary(
           title: '推荐歌单',
-          onTap: () => print('tap'),
+          onTap: controller.onRecommendSongListTapAll,
         ).sliverToBoxAdapter(),
         // 歌单列表
         _buildRecommendList(),
@@ -144,7 +160,8 @@ class HomePage extends GetView<HomeController> {
         // 标题
         TitleWidget.refresh(
           title: '推荐歌曲',
-          onTap: () => print('tap'),
+          onTap: controller.onRecommendNewSongsTapAll,
+          onRefresh: controller.onRecommendNewSongsRefresh,
         ).sliverToBoxAdapter(),
         // 歌曲列表
         _buildRecommendSongs(),

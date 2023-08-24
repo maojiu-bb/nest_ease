@@ -56,11 +56,23 @@ class HomeController extends GetxController {
   // 分类点击事件
   void onCategoryTap(int categoryId) {}
 
+  // 推荐歌单 all
+  void onRecommendSongListTapAll() {}
+
   // 推荐歌单点击事件
-  void onRecommendTap() {}
+  void onRecommendSongListTap() {}
 
   // 推荐歌单播放
-  void onRecommendPlay() {}
+  void onRecommendSongListPlay() {}
+
+  // 推荐歌曲 all
+  void onRecommendNewSongsTapAll() {}
+
+  // 推荐歌曲刷新
+  void onRecommendNewSongsRefresh() {}
+
+  // 推荐歌曲点击事件
+  void onRecommendNewSongsTap() {}
 
   // 读取缓存
   Future<void> _loadCache() async {

@@ -1,6 +1,6 @@
 import 'program.dart';
 
-class DjprogramModel {
+class DjProgramModel {
   int? id;
   int? type;
   String? name;
@@ -11,7 +11,7 @@ class DjprogramModel {
   Program? program;
   String? alg;
 
-  DjprogramModel({
+  DjProgramModel({
     this.id,
     this.type,
     this.name,
@@ -23,8 +23,8 @@ class DjprogramModel {
     this.alg,
   });
 
-  factory DjprogramModel.fromJson(Map<String, dynamic> json) {
-    return DjprogramModel(
+  factory DjProgramModel.fromJson(Map<String, dynamic> json) {
+    return DjProgramModel(
       id: json['id'] as int?,
       type: json['type'] as int?,
       name: json['name'] as String?,

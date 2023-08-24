@@ -42,6 +42,9 @@ class HomeController extends GetxController {
   // 推荐歌曲
   List<SongsModel> recommendNewSongs = [];
 
+  // 推荐电台
+  List<DjProgramModel> recommendDjPrograms = [];
+
   // appbar 点击
   void onAppBarTap() {
     Get.toNamed(RouteNames.searchSearchIndex);
@@ -74,6 +77,15 @@ class HomeController extends GetxController {
   // 推荐歌曲点击事件
   void onRecommendNewSongsTap() {}
 
+  // 推荐电台 all
+  void onRecommendDjProgramTapAll() {}
+
+  // 推荐电台点击事件
+  void onRecommendDjProgramTap() {}
+
+  // 推荐电台刷新
+  void onRecommendDjProgramRefresh() {}
+
   // 读取缓存
   Future<void> _loadCache() async {
     var stringSwiper = Storage().getString(Constants.storageBanner);
@@ -83,6 +95,9 @@ class HomeController extends GetxController {
 
     var stringRecommendNewSongs =
         Storage().getString(Constants.storageRecommendSong);
+
+    var stringRecommendDjPrograms =
+        Storage().getString(Constants.storageRecommendDjProgram);
 
     swiperItems = stringSwiper != " "
         ? jsonDecode(stringSwiper).map<KeyValueModel>((item) {
@@ -99,6 +114,12 @@ class HomeController extends GetxController {
     recommendNewSongs = stringRecommendNewSongs != " "
         ? jsonDecode(stringRecommendNewSongs).map<SongsModel>((item) {
             return SongsModel.fromJson(item);
+          }).toList()
+        : [];
+
+    recommendDjPrograms = stringRecommendDjPrograms != " "
+        ? jsonDecode(stringRecommendDjPrograms).map<DjProgramModel>((item) {
+            return DjProgramModel.fromJson(item);
           }).toList()
         : [];
   }
@@ -120,12 +141,17 @@ class HomeController extends GetxController {
     // 获取推荐歌曲
     recommendNewSongs = await MusicApi.songs();
 
+    // 获取推荐电台
+    recommendDjPrograms = await RadioApi.recommendDjProgram();
+
     // 离线存储
     Storage().setJson(Constants.storageBanner, swiperItems);
 
     Storage().setJson(Constants.storageRecommendSongList, recommendSongs);
 
     Storage().setJson(Constants.storageRecommendSong, recommendNewSongs);
+
+    Storage().setJson(Constants.storageRecommendDjProgram, recommendDjPrograms);
 
     update(["home"]);
   }

@@ -17,4 +17,7 @@ class Constants {
 
   // 推荐歌曲
   static const storageRecommendSong = 'recommend_song';
+
+  // 推荐电台
+  static const storageRecommendDjProgram = 'recommend_dj_program';
 }

@@ -29,6 +29,7 @@ class Dj {
   String? avatarImgIdStr;
   String? backgroundImgIdStr;
   bool? anchor;
+  // String? avatarImgIdStr;
   String? brand;
 
   Dj({
@@ -62,6 +63,7 @@ class Dj {
     this.avatarImgIdStr,
     this.backgroundImgIdStr,
     this.anchor,
+    // this.avatarImgIdStr,
     this.brand,
   });
 
@@ -96,6 +98,7 @@ class Dj {
         avatarImgIdStr: json['avatarImgIdStr'] as String?,
         backgroundImgIdStr: json['backgroundImgIdStr'] as String?,
         anchor: json['anchor'] as bool?,
+        // avatarImgIdStr: json['avatarImgId_str'] as String?,
         brand: json['brand'] as String?,
       );
 

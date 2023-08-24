@@ -107,7 +107,7 @@ class Program {
         userId: json['userId'] as int?,
         coverUrl: json['coverUrl'] as String?,
         commentThreadId: json['commentThreadId'] as String?,
-        channels: json['channels'] as List<String>?,
+        channels: json['channels']?.cast<String>(),
         titbits: json['titbits'] as dynamic,
         titbitImages: json['titbitImages'] as dynamic,
         pubStatus: json['pubStatus'] as int?,

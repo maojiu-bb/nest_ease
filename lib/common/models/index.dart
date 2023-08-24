@@ -8,4 +8,6 @@ export './music/swiper_model.dart';
 export './music/category_model.dart';
 export './music/song_list_model.dart';
 export './music/songs_model/songs_model.dart';
+
+export './radio/dj_program_model/dj_program_model.dart';
 // export './xxxx.dart';

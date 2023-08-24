@@ -137,6 +137,36 @@ class HomePage extends GetView<HomeController> {
         .sliverToBoxAdapter();
   }
 
+  // 推荐电台
+  Widget _buildRecommendDjPrograms() {
+    return <Widget>[
+      for (var i = 0;
+          i < (controller.recommendDjPrograms.length / 3).ceil();
+          i++)
+        <Widget>[
+          for (var j = i * 3; j < i * 3 + 3; j++)
+            if (j < controller.recommendDjPrograms.length)
+              DjProgramWidget(
+                image: controller.recommendDjPrograms[j].picUrl!,
+                name: controller.recommendDjPrograms[j].name!,
+                copyRight: controller.recommendDjPrograms[j].copywriter!,
+                onTap: controller.onRecommendDjProgramTap,
+              )
+            else
+              Container(), // 如果超出了列表长度，在这里使用一个空的容器
+        ].toColumn(
+          mainAxisAlignment: MainAxisAlignment.start,
+        ),
+    ]
+        .toListView(
+          scrollDirection: Axis.horizontal,
+        )
+        .height(260)
+        .paddingHorizontal(AppSpace.listItem)
+        .paddingVertical(AppSpace.page)
+        .sliverToBoxAdapter();
+  }
+
   // 主视图
   Widget _buildView() {
     return CustomScrollView(
@@ -165,6 +195,16 @@ class HomePage extends GetView<HomeController> {
         ).sliverToBoxAdapter(),
         // 歌曲列表
         _buildRecommendSongs(),
+
+        // 推荐电台
+        // 标题
+        TitleWidget.refresh(
+          title: '推荐电台',
+          onTap: controller.onRecommendDjProgramTapAll,
+          onRefresh: controller.onRecommendDjProgramRefresh,
+        ).sliverToBoxAdapter(),
+        // 电台列表
+        _buildRecommendDjPrograms(),
       ],
     );
   }

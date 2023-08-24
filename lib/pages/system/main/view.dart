@@ -57,6 +57,10 @@ class _MainViewGetX extends GetView<MainController> {
                   icon: AssetsSvgs.homeSvg,
                 ),
                 NavigationItemModel(
+                  label: '视频',
+                  icon: AssetsSvgs.vedioSvg,
+                ),
+                NavigationItemModel(
                   label: '电台',
                   icon: AssetsSvgs.diantaiSvg,
                 ),
@@ -76,6 +80,7 @@ class _MainViewGetX extends GetView<MainController> {
           onPageChanged: controller.onChangeIndex,
           children: const [
             HomePage(),
+            VedioIndexPage(),
             RadioIndexPage(),
             UserIndexPage(),
           ],

@@ -6,6 +6,7 @@ class MainBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<HomeController>(() => HomeController());
+    Get.lazyPut<VedioIndexController>(() => VedioIndexController());
     Get.lazyPut<RadioIndexController>(() => RadioIndexController());
     Get.lazyPut<UserIndexController>(() => UserIndexController());
     Get.lazyPut<MainController>(() => MainController());

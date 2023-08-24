@@ -6,4 +6,5 @@ static const homeSvg = 'assets/svgs/home.svg';
 static const paihangbangSvg = 'assets/svgs/paihangbang.svg';
 static const searchSvg = 'assets/svgs/search.svg';
 static const userSvg = 'assets/svgs/user.svg';
+static const vedioSvg = 'assets/svgs/vedio.svg';
 static const yuyingSvg = 'assets/svgs/yuying.svg';

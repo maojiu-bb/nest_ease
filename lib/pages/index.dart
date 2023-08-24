@@ -13,4 +13,6 @@ export 'system/splash/index.dart';
 export 'system/welcome/index.dart';
 export 'user/user_detail/index.dart';
 export 'user/user_index/index.dart';
+export 'vedio/vedio_detail/index.dart';
+export 'vedio/vedio_index/index.dart';
 // export './xxxx.dart';

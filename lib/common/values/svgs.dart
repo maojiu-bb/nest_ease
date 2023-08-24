@@ -9,4 +9,5 @@ class AssetsSvgs {
   static const gequSvg = 'assets/svgs/gequ.svg';
   static const geshouSvg = 'assets/svgs/geshou.svg';
   static const paihangbangSvg = 'assets/svgs/paihangbang.svg';
+  static const vedioSvg = 'assets/svgs/vedio.svg';
 }

@@ -69,5 +69,13 @@ class RoutePages {
       name: RouteNames.userUserIndex,
       page: () => const UserIndexPage(),
     ),
+    GetPage(
+      name: RouteNames.vedioVedioDetail,
+      page: () => const VedioDetailPage(),
+    ),
+    GetPage(
+      name: RouteNames.vedioVedioIndex,
+      page: () => const VedioIndexPage(),
+    ),
   ];
 }

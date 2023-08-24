@@ -175,9 +175,12 @@ class HomePage extends GetView<HomeController> {
           imgUrl: controller.recommendMvs[i].picUrl!,
           name: controller.recommendMvs[i].name!,
           copywrite: controller.recommendMvs[i].copywriter!,
-          onTap: controller.onRecommendMvTap,
           artistList:
               controller.recommendMvs[i].artists!.map((e) => e.name!).toList(),
+          playCount: NumberTranslate(controller.recommendMvs[i].playCount!)
+              .translate(),
+          onTap: controller.onRecommendMvTap,
+          onPlay: controller.onRecommendMvPlay,
         ),
     ]
         .toColumn()

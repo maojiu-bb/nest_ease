@@ -98,6 +98,9 @@ class HomeController extends GetxController {
   // 推荐 mv 刷新
   void onRecommendMvRefresh() {}
 
+  // 推荐 mv 播放
+  void onRecommendMvPlay() {}
+
   // 读取缓存
   Future<void> _loadCache() async {
     var stringSwiper = Storage().getString(Constants.storageBanner);

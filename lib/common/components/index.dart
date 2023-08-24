@@ -7,4 +7,5 @@ export './category_item.dart';
 export './song_list.dart';
 export './new_song.dart';
 export './dj_program.dart';
+export './recommend_mv.dart';
 // export './xxxx.dart';

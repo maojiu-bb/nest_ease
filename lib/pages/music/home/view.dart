@@ -167,6 +167,23 @@ class HomePage extends GetView<HomeController> {
         .sliverToBoxAdapter();
   }
 
+  // 推荐mv
+  Widget _buildRecommendMv() {
+    return <Widget>[
+      RecommendMvWidget(
+        imgUrl: '',
+        name: 'name',
+        copywrite: 'copywrite',
+        onTap: () => print('object'),
+        artistList: const ['artist', 'artist'],
+      ),
+    ]
+        .toColumn()
+        .paddingHorizontal(AppSpace.listItem)
+        .paddingVertical(AppSpace.page)
+        .sliverToBoxAdapter();
+  }
+
   // 主视图
   Widget _buildView() {
     return CustomScrollView(
@@ -205,6 +222,16 @@ class HomePage extends GetView<HomeController> {
         ).sliverToBoxAdapter(),
         // 电台列表
         _buildRecommendDjPrograms(),
+
+        // 推荐mv
+        // 标题
+        TitleWidget.refresh(
+          title: '推荐 mv',
+          onTap: controller.onRecommendMvTapAll,
+          onRefresh: controller.onRecommendMvRefresh,
+        ).sliverToBoxAdapter(),
+        // 电台列表
+        _buildRecommendMv(),
       ],
     );
   }

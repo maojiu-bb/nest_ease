@@ -13,4 +13,17 @@ class RadioApi {
 
     return recommendDjProgramList;
   }
+
+  // 电台banner
+  static Future<List<SwiperRadioModel>> swiperRadio() async {
+    var res = await DioService.to.get(
+      '/dj/banner',
+    );
+    List<SwiperRadioModel> swiperRadioList = [];
+    for (var item in res.data['data']) {
+      swiperRadioList.add(SwiperRadioModel.fromJson(item));
+    }
+
+    return swiperRadioList;
+  }
 }

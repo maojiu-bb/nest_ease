@@ -23,4 +23,7 @@ class Constants {
 
   // 推荐mv
   static const storageRecommendMv = 'recommend_mv';
+
+  // 电台轮播图
+  static const storageDjBanner = 'dj_banner';
 }

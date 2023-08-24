@@ -20,4 +20,7 @@ class Constants {
 
   // 推荐电台
   static const storageRecommendDjProgram = 'recommend_dj_program';
+
+  // 推荐mv
+  static const storageRecommendMv = 'recommend_mv';
 }

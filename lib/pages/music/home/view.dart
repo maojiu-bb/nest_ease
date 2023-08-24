@@ -170,13 +170,15 @@ class HomePage extends GetView<HomeController> {
   // 推荐mv
   Widget _buildRecommendMv() {
     return <Widget>[
-      RecommendMvWidget(
-        imgUrl: '',
-        name: 'name',
-        copywrite: 'copywrite',
-        onTap: () => print('object'),
-        artistList: const ['artist', 'artist'],
-      ),
+      for (var i = 0; i < controller.recommendMvs.length; i++)
+        RecommendMvWidget(
+          imgUrl: controller.recommendMvs[i].picUrl!,
+          name: controller.recommendMvs[i].name!,
+          copywrite: controller.recommendMvs[i].copywriter!,
+          onTap: controller.onRecommendMvTap,
+          artistList:
+              controller.recommendMvs[i].artists!.map((e) => e.name!).toList(),
+        ),
     ]
         .toColumn()
         .paddingHorizontal(AppSpace.listItem)

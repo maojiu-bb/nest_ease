@@ -45,6 +45,9 @@ class HomeController extends GetxController {
   // 推荐电台
   List<DjProgramModel> recommendDjPrograms = [];
 
+  // 推荐 mv
+  List<RecommendMvModel> recommendMvs = [];
+
   // appbar 点击
   void onAppBarTap() {
     Get.toNamed(RouteNames.searchSearchIndex);
@@ -108,6 +111,8 @@ class HomeController extends GetxController {
     var stringRecommendDjPrograms =
         Storage().getString(Constants.storageRecommendDjProgram);
 
+    var stringRecommendMvs = Storage().getString(Constants.storageRecommendMv);
+
     swiperItems = stringSwiper != " "
         ? jsonDecode(stringSwiper).map<KeyValueModel>((item) {
             return KeyValueModel.fromJson(item);
@@ -129,6 +134,12 @@ class HomeController extends GetxController {
     recommendDjPrograms = stringRecommendDjPrograms != " "
         ? jsonDecode(stringRecommendDjPrograms).map<DjProgramModel>((item) {
             return DjProgramModel.fromJson(item);
+          }).toList()
+        : [];
+
+    recommendMvs = stringRecommendMvs != " "
+        ? jsonDecode(stringRecommendMvs).map<RecommendMvModel>((item) {
+            return RecommendMvModel.fromJson(item);
           }).toList()
         : [];
   }
@@ -153,6 +164,9 @@ class HomeController extends GetxController {
     // 获取推荐电台
     recommendDjPrograms = await RadioApi.recommendDjProgram();
 
+    // 获取推荐 mv
+    recommendMvs = await MvApi.recommendMv();
+
     // 离线存储
     Storage().setJson(Constants.storageBanner, swiperItems);
 
@@ -161,6 +175,8 @@ class HomeController extends GetxController {
     Storage().setJson(Constants.storageRecommendSong, recommendNewSongs);
 
     Storage().setJson(Constants.storageRecommendDjProgram, recommendDjPrograms);
+
+    Storage().setJson(Constants.storageRecommendMv, recommendMvs);
 
     update(["home"]);
   }

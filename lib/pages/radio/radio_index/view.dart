@@ -8,6 +8,41 @@ import 'index.dart';
 class RadioIndexPage extends GetView<RadioIndexController> {
   const RadioIndexPage({Key? key}) : super(key: key);
 
+  // appbar
+  AppBar _buildAppBar() {
+    return AppBar(
+      // 背景透明
+      backgroundColor: Colors.transparent,
+      // 取消阴影
+      elevation: 0,
+      // 标题栏左侧间距
+      titleSpacing: AppSpace.listItem,
+      // 搜索栏
+      title: InputWidget.search(
+        // 提示文字，多语言
+        hintText: '聆听新声音',
+        // 点击事件
+        onTap: controller.onAppBarTap,
+        // 只读
+        readOnly: true,
+      ),
+      // 右侧的按钮区
+      actions: [
+        // 图标
+        IconWidget.svg(
+          AssetsSvgs.yuyingSvg,
+          size: 20,
+          isDot: true, // 未读消息 小圆点
+        )
+            .unconstrained() // 去掉约束, appBar 会有个约束下来
+            .padding(
+              left: AppSpace.listItem,
+              right: AppSpace.page,
+            ),
+      ],
+    );
+  }
+
   // 轮播图
   Widget _buildBanner<HomeController>() {
     return GetBuilder(
@@ -15,6 +50,8 @@ class RadioIndexPage extends GetView<RadioIndexController> {
             id: 'radio_swiper',
             builder: (_) {
               return CarouselWidget(
+                // onTap: controller.onBannerTap,
+                onTap: controller.onBannerTap,
                 items: controller.swiper.map((e) {
                   return KeyValueModel(
                     key: e.typeTitle!,
@@ -50,7 +87,7 @@ class RadioIndexPage extends GetView<RadioIndexController> {
       id: "radio_index",
       builder: (_) {
         return Scaffold(
-          // appBar: AppBar(title: const Text("radio_index")),
+          appBar: _buildAppBar(),
           body: SafeArea(
             child: _buildView(),
           ),

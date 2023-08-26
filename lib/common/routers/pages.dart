@@ -62,6 +62,10 @@ class RoutePages {
       page: () => const WelcomePage(),
     ),
     GetPage(
+      name: RouteNames.systemWebview,
+      page: () => const WebviewPage(),
+    ),
+    GetPage(
       name: RouteNames.userUserDetail,
       page: () => const UserDetailPage(),
     ),

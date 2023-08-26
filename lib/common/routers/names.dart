@@ -12,6 +12,7 @@ class RouteNames {
   static const systemMain = '/system_main';
   static const systemSplash = '/system_splash';
   static const systemWelcome = '/system_welcome';
+  static const systemWebview = '/system_webview';
   static const userUserDetail = '/user_user_detail';
   static const userUserIndex = '/user_user_index';
   static const vedioVedioDetail = '/vedio_vedio_detail';

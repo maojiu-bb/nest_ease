@@ -40,6 +40,10 @@
         page: () => const SplashPage(),
       ),
       GetPage(
+        name: RouteNames.systemWebview,
+        page: () => const WebviewPage(),
+      ),
+      GetPage(
         name: RouteNames.systemWelcome,
         page: () => const WelcomePage(),
       ),

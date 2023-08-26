@@ -12,10 +12,23 @@ class RadioIndexController extends GetxController {
   // 轮播图当前位置
   int swiperCurrentIndex = 0;
 
+  // appbar
+  void onAppBarTap() {}
+
   // 轮播图切换
   void onChangeBanner(int index, /*CarouselPageChangedReason*/ reason) {
     swiperCurrentIndex = index;
     update(["radio_swiper"]);
+  }
+
+  // 轮播图点击事件
+  void onBannerTap(int index, dynamic imgUrl) {
+    Get.toNamed(
+      RouteNames.systemWebview,
+      arguments: {
+        "url": swiper[index].url,
+      },
+    );
   }
 
   // 读取缓存

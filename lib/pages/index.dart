@@ -11,6 +11,7 @@ export 'system/login/index.dart';
 export 'system/main/index.dart';
 export 'system/splash/index.dart';
 export 'system/welcome/index.dart';
+export 'system/webview/index.dart';
 export 'user/user_detail/index.dart';
 export 'user/user_index/index.dart';
 export 'vedio/vedio_detail/index.dart';

@@ -74,7 +74,7 @@ class NewSongWidget extends StatelessWidget {
             author,
             size: authorSize ?? 12,
             overflow: TextOverflow.ellipsis,
-          ),
+          ).tight(width: 70),
 
           const SizedBox(width: 10),
 
@@ -84,7 +84,7 @@ class NewSongWidget extends StatelessWidget {
             size: albumSize ?? 12,
             overflow: TextOverflow.ellipsis,
           ).tight(width: 100),
-        ].toRow(),
+        ].toRow().tight(width: 180),
       ].toColumn(
         crossAxisAlignment: CrossAxisAlignment.start,
       ),

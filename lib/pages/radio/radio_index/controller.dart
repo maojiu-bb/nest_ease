@@ -12,6 +12,9 @@ class RadioIndexController extends GetxController {
   // 轮播图当前位置
   int swiperCurrentIndex = 0;
 
+  // 分类列表
+  List<RadioCategoryItemModel> categoryList = [];
+
   // appbar
   void onAppBarTap() {}
 
@@ -31,13 +34,24 @@ class RadioIndexController extends GetxController {
     );
   }
 
+  // category 点击
+  void onCategoryTap(int categoryId) {}
+
   // 读取缓存
   Future<void> _loadCache() async {
     var stringSwiper = Storage().getString(Constants.storageDjBanner);
 
+    var stringCategory = Storage().getString(Constants.storageDjCategory);
+
     swiper = stringSwiper != ''
         ? jsonDecode(stringSwiper).map<SwiperRadioModel>((item) {
             return SwiperRadioModel.fromJson(item);
+          }).toList()
+        : [];
+
+    categoryList = stringCategory != ''
+        ? jsonDecode(stringCategory).map<RadioCategoryItemModel>((item) {
+            return RadioCategoryItemModel.fromJson(item);
           }).toList()
         : [];
   }
@@ -47,8 +61,13 @@ class RadioIndexController extends GetxController {
     // 获取电台 banner
     swiper = await RadioApi.swiperRadio();
 
+    // 获取分类列表
+    categoryList = await RadioApi.radioCategory();
+
     // 持久化存储
     Storage().setJson(Constants.storageDjBanner, swiper);
+
+    Storage().setJson(Constants.storageDjCategory, categoryList);
 
     update(["radio_index"]);
   }

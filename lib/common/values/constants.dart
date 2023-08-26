@@ -26,4 +26,7 @@ class Constants {
 
   // 电台轮播图
   static const storageDjBanner = 'dj_banner';
+
+  // 电台分类
+  static const storageDjCategory = 'dj_category';
 }

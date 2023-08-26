@@ -70,12 +70,33 @@ class RadioIndexPage extends GetView<RadioIndexController> {
         .sliverPaddingHorizontal(AppSpace.page);
   }
 
+  // 分类列表
+  Widget _buildCategories() {
+    return <Widget>[
+      for (var i = 0; i < controller.categoryList.length; i++)
+        RadioCategoryListItemWidget(
+          category: controller.categoryList[i],
+          onTap: (categoryId) => controller.onCategoryTap(categoryId),
+        ).paddingRight(AppSpace.listItem)
+    ]
+        .toListView(
+          scrollDirection: Axis.horizontal,
+        )
+        .height(90.w)
+        .paddingVertical(AppSpace.listRow)
+        .sliverToBoxAdapter()
+        .sliverPaddingHorizontal(AppSpace.page);
+  }
+
   // 主视图
   Widget _buildView() {
     return CustomScrollView(
       slivers: [
         // 轮播图
         _buildBanner(),
+
+        // 分类
+        _buildCategories(),
       ],
     );
   }

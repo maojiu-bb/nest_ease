@@ -26,4 +26,16 @@ class RadioApi {
 
     return swiperRadioList;
   }
+
+  // 电台分类
+  static Future<List<RadioCategoryItemModel>> radioCategory() async {
+    var res = await DioService.to.get(
+      '/dj/catelist',
+    );
+    List<RadioCategoryItemModel> radioCategoryList = [];
+    for (var item in res.data['categories']) {
+      radioCategoryList.add(RadioCategoryItemModel.fromJson(item));
+    }
+    return radioCategoryList;
+  }
 }

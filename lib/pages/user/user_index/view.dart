@@ -21,7 +21,7 @@ class UserIndexPage extends GetView<UserIndexController> {
       id: "user_index",
       builder: (_) {
         return Scaffold(
-          appBar: AppBar(title: const Text("user_index")),
+          // appBar: AppBar(title: const Text("user_index")),
           body: Stack(
             children: [
               SafeArea(

@@ -102,8 +102,13 @@ class SongListWidget extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
         size: fontSize ?? 14,
       ),
-    ].toColumn().width(115).height(160).paddingHorizontal(
+    ]
+        .toColumn()
+        .width(115)
+        .height(160)
+        .paddingHorizontal(
           AppSpace.listView,
-        );
+        )
+        .onTap(onTap);
   }
 }

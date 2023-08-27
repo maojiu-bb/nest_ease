@@ -290,6 +290,36 @@ class ButtonWidget extends StatelessWidget {
         ),
         super(key: key);
 
+  /// 图标 / 文字
+  ButtonWidget.iconText(
+    this.text,
+    this.icon, {
+    Key? key,
+    Color? textColor,
+    double? textSize,
+    FontWeight? textWeight,
+    this.type = ButtonWidgetType.textIcon,
+    this.onTap,
+    this.borderRadius,
+    this.backgroundColor,
+    this.borderColor,
+    this.width,
+    this.height,
+  })  : child = <Widget>[
+          icon!.paddingLeft(AppSpace.iconTextSmail),
+          TextWidget.button(
+            text: text!,
+            size: textSize,
+            color: textColor ?? AppColors.onPrimaryContainer,
+            weight: textWeight,
+          ).paddingRight(AppSpace.iconTextSmail),
+        ]
+            .toRow(
+              mainAxisSize: MainAxisSize.min,
+            )
+            .paddingVertical(AppSpace.button),
+        super(key: key);
+
   /// 文字 / 图标 / dropdown
   ButtonWidget.dropdown(
     this.text,

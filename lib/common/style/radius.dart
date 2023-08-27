@@ -3,6 +3,9 @@ class AppRadius {
   /// 按钮圆角
   static double get button => 6;
 
+  /// circle button
+  static double get circlebutton => 15;
+
   /// 按钮 文字填充圆角
   static double get buttonTextFilled => 3;
 

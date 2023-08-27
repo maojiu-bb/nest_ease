@@ -95,7 +95,7 @@ class HomePage extends GetView<HomeController> {
           text: controller.recommendSongs[i].name!,
           playCount: NumberTranslate(controller.recommendSongs[i].playCount!)
               .translate(),
-          onTap: controller.onRecommendSongListTap,
+          onTap: () => controller.onRecommendSongListTap(i),
           onPlay: controller.onRecommendSongListPlay,
         )
     ]

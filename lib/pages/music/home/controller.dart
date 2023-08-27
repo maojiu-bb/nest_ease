@@ -66,7 +66,15 @@ class HomeController extends GetxController {
   void onRecommendSongListTapAll() {}
 
   // 推荐歌单点击事件
-  void onRecommendSongListTap() {}
+  void onRecommendSongListTap(int index) {
+    Get.toNamed(
+      RouteNames.musicMusicList,
+      arguments: {
+        'songList': recommendSongs[index],
+        'appbar_title': '推荐歌单',
+      },
+    );
+  }
 
   // 推荐歌单播放
   void onRecommendSongListPlay() {}

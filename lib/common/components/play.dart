@@ -44,8 +44,8 @@ class _PlayWidgetState extends State<PlayWidget>
         // 图片
         ImageWidget.url(
           widget.image,
-          width: 50.w,
-          height: 50.w,
+          width: 38.w,
+          height: 38.w,
           fit: BoxFit.fill,
         ),
 
@@ -54,7 +54,7 @@ class _PlayWidgetState extends State<PlayWidget>
         // 名字
         TextWidget.body2(
           widget.name,
-          size: 15,
+          size: 14,
         ),
       ].toRow(),
 

@@ -121,8 +121,9 @@ class RadioIndexPage extends GetView<RadioIndexController> {
                 right: 0,
                 bottom: 90,
                 child: PlayWidget(
-                  image: 'image',
-                  name: 'name',
+                  image:
+                      'https://p2.music.126.net/kT4AECoc13oVKLEg_-eFMA==/109951166578436098.jpg',
+                  name: '指纹',
                   onPlay: () => {},
                   onNext: () => {},
                   onPrevious: () => {},

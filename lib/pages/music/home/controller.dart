@@ -71,7 +71,6 @@ class HomeController extends GetxController {
       RouteNames.musicMusicList,
       arguments: {
         'songList': recommendSongs[index],
-        'appbar_title': '推荐歌单',
       },
     );
   }

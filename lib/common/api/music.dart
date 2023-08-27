@@ -39,4 +39,19 @@ class MusicApi {
     }
     return songs;
   }
+
+  // 获取歌单所有歌曲
+  static Future<List<SongListMusicModel>> songListMusic(
+      SongListRequest req) async {
+    var res = await DioService.to.get(
+      '/playlist/track/all',
+      params: req.toJson(),
+    );
+    List<SongListMusicModel> musicList = [];
+    for (var item in res.data['songs']) {
+      musicList.add(SongListMusicModel.fromJson(item));
+    }
+
+    return musicList;
+  }
 }

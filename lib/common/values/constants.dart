@@ -29,4 +29,7 @@ class Constants {
 
   // 电台分类
   static const storageDjCategory = 'dj_category';
+
+  // 歌单所有歌曲
+  static const storageMusicList = 'music_list';
 }

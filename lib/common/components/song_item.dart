@@ -21,6 +21,9 @@ class SongItemWidget extends StatelessWidget {
   // more
   final VoidCallback onShowMore;
 
+  // like
+  final VoidCallback onLike;
+
   const SongItemWidget({
     Key? key,
     required this.name,
@@ -29,6 +32,7 @@ class SongItemWidget extends StatelessWidget {
     required this.artist,
     required this.onDownload,
     required this.onShowMore,
+    required this.onLike,
   }) : super(key: key);
 
   @override
@@ -51,9 +55,13 @@ class SongItemWidget extends StatelessWidget {
           TextWidget.title3(
             name,
             size: 17,
-          ),
+            overflow: TextOverflow.ellipsis,
+          ).tight(width: 120),
           // artist
-          TextWidget.body2(artist.join(' / ')),
+          TextWidget.body2(
+            artist.join(' / '),
+            overflow: TextOverflow.ellipsis,
+          ).tight(width: 120),
         ].toColumn(
           crossAxisAlignment: CrossAxisAlignment.start,
         ),
@@ -64,6 +72,12 @@ class SongItemWidget extends StatelessWidget {
         ButtonWidget.icon(
           Icon(
             Icons.download_rounded,
+            color: AppColors.onBackground,
+          ),
+        ),
+        ButtonWidget.icon(
+          Icon(
+            Icons.favorite_border_outlined,
             color: AppColors.onBackground,
           ),
         ),

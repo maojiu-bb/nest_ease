@@ -25,15 +25,15 @@ class MusicListPage extends GetView<MusicListController> {
           IconWidget.icon(
             Icons.download_rounded,
             color: AppColors.onBackground,
-          ),
+          ).onTap(controller.onDownloadAll),
           IconWidget.icon(
             Icons.share,
             color: AppColors.onBackground,
-          ),
+          ).onTap(controller.onShare),
           IconWidget.icon(
             Icons.more_vert,
             color: AppColors.onBackground,
-          ),
+          ).onTap(controller.onMoreDetail),
         ]
             .toRow(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -91,9 +91,14 @@ class MusicListPage extends GetView<MusicListController> {
             ),
             textColor: AppColors.onPrimary,
             backgroundColor: AppColors.primary,
+            onTap: controller.onPlayAll,
           ),
-          const ButtonWidget.icon(
-            Icon(Icons.star_rate_rounded),
+          ButtonWidget.icon(
+            Icon(
+              Icons.star_border_outlined,
+              color: AppColors.onBackground,
+            ),
+            onTap: controller.onStar,
           ),
         ].toRow(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -109,6 +114,22 @@ class MusicListPage extends GetView<MusicListController> {
         .paddingVertical(AppSpace.listView);
   }
 
+  // 歌曲列表
+  Widget _buildMusicList() {
+    return <Widget>[
+      for (var i = 0; i < controller.musicList.length; i++)
+        SongItemWidget(
+          name: controller.musicList[i].name!,
+          image: controller.musicList[i].al!.picUrl!,
+          artist: controller.musicList[i].ar!.map((e) => e.name!).toList(),
+          onTap: controller.onTap,
+          onDownload: controller.onDownload,
+          onShowMore: controller.onShowMore,
+          onLike: controller.onLike,
+        ),
+    ].toColumn().paddingBottom(40);
+  }
+
   // 主视图
   Widget _buildView() {
     return CustomScrollView(
@@ -116,15 +137,8 @@ class MusicListPage extends GetView<MusicListController> {
         // 顶部
         _buildTopInfo().sliverToBoxAdapter(),
 
-        SongItemWidget(
-          image:
-              'https://p1.music.126.net/JgKRK6kQSOZj6SOr0QVpAg==/109951167216622559.jpg',
-          name: 'name',
-          artist: const ['maojiu', 'skty'],
-          onTap: () => {},
-          onDownload: () => {},
-          onShowMore: () => {},
-        ).sliverToBoxAdapter()
+        // 歌曲列表
+        _buildMusicList().sliverToBoxAdapter()
       ],
     );
   }

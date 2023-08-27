@@ -115,6 +115,16 @@ class MusicListPage extends GetView<MusicListController> {
       slivers: [
         // 顶部
         _buildTopInfo().sliverToBoxAdapter(),
+
+        SongItemWidget(
+          image:
+              'https://p1.music.126.net/JgKRK6kQSOZj6SOr0QVpAg==/109951167216622559.jpg',
+          name: 'name',
+          artist: const ['maojiu', 'skty'],
+          onTap: () => {},
+          onDownload: () => {},
+          onShowMore: () => {},
+        ).sliverToBoxAdapter()
       ],
     );
   }

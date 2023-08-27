@@ -29,6 +29,9 @@ class Global {
 
     // user service
     Get.put(UserService());
+
+    // audio service
+    Get.put(AudioPlayerService());
   }
 
   // 系统样式(android)

@@ -9,4 +9,5 @@ export './new_song.dart';
 export './dj_program.dart';
 export './recommend_mv.dart';
 export './radio_category_item.dart';
+export './play.dart';
 // export './xxxx.dart';

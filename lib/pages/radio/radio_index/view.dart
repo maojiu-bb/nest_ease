@@ -109,8 +109,26 @@ class RadioIndexPage extends GetView<RadioIndexController> {
       builder: (_) {
         return Scaffold(
           appBar: _buildAppBar(),
-          body: SafeArea(
-            child: _buildView(),
+          body: Stack(
+            children: [
+              SafeArea(
+                child: _buildView(),
+              ),
+
+              // 固定在底部的 PlayWidget
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 90,
+                child: PlayWidget(
+                  image: 'image',
+                  name: 'name',
+                  onPlay: () => {},
+                  onNext: () => {},
+                  onPrevious: () => {},
+                ),
+              ),
+            ],
           ),
         );
       },

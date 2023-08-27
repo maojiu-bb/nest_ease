@@ -23,9 +23,9 @@ class MusicListPage extends GetView<MusicListController> {
       actions: [
         <Widget>[
           IconWidget.icon(
-            Icons.download_rounded,
+            Icons.search,
             color: AppColors.onBackground,
-          ).onTap(controller.onDownloadAll),
+          ).onTap(controller.onSearch),
           IconWidget.icon(
             Icons.share,
             color: AppColors.onBackground,
@@ -122,7 +122,7 @@ class MusicListPage extends GetView<MusicListController> {
           name: controller.musicList[i].name!,
           image: controller.musicList[i].al!.picUrl!,
           artist: controller.musicList[i].ar!.map((e) => e.name!).toList(),
-          onTap: controller.onTap,
+          onTap: controller.onMusicItemTap,
           onDownload: controller.onDownload,
           onShowMore: controller.onShowMore,
           onLike: controller.onLike,
@@ -136,6 +136,8 @@ class MusicListPage extends GetView<MusicListController> {
       slivers: [
         // 顶部
         _buildTopInfo().sliverToBoxAdapter(),
+
+        const Divider().sliverToBoxAdapter(),
 
         // 歌曲列表
         _buildMusicList().sliverToBoxAdapter()

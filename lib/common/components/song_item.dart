@@ -65,7 +65,7 @@ class SongItemWidget extends StatelessWidget {
         ].toColumn(
           crossAxisAlignment: CrossAxisAlignment.start,
         ),
-      ].toRow(),
+      ].toRow().onTap(onTap),
 
       // 操作区
       <Widget>[

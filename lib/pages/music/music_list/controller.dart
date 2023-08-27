@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:nestease_cloud_music/common/index.dart';
+import 'package:nestease_cloud_music/pages/index.dart';
 
 class MusicListController extends GetxController {
   MusicListController();
@@ -15,7 +16,7 @@ class MusicListController extends GetxController {
   List<SongListMusicModel> musicList = [];
 
   // 下载全部
-  void onDownloadAll() {}
+  void onSearch() {}
 
   // 分享
   void onShare() {}
@@ -30,7 +31,12 @@ class MusicListController extends GetxController {
   void onStar() {}
 
   // 歌曲点击
-  void onMusicItemTap() {}
+  void onMusicItemTap() {
+    Get.to(
+      () => const MusicDetailPage(),
+      transition: Transition.downToUp,
+    );
+  }
 
   // download
   void onDownload() {}
@@ -64,8 +70,6 @@ class MusicListController extends GetxController {
 
     update(["music_list"]);
   }
-
-  void onTap() {}
 
   @override
   void onInit() {

@@ -49,10 +49,43 @@ class MusicDetailPage extends GetView<MusicDetailController> {
     );
   }
 
+  // 图片信息
+  Widget _buildInfo() {
+    return <Widget>[
+      // 图片
+      ImageWidget.url(
+        controller.songDetail[0].al!.picUrl!,
+        width: 280,
+        height: 280,
+        radius: 15,
+      ),
+      const SizedBox(height: 15),
+      // 文字
+      TextWidget.title1(
+        controller.songDetail[0].name!,
+        size: 26,
+        maxLines: 1,
+        overflow: TextOverflow.fade,
+      ),
+      TextWidget.body1(
+        controller.songDetail[0].ar!.map((e) => e.name).toList().join(' / '),
+        maxLines: 1,
+        overflow: TextOverflow.fade,
+      ),
+    ]
+        .toColumn(
+          mainAxisAlignment: MainAxisAlignment.center,
+        )
+        .paddingHorizontal(AppSpace.page);
+  }
+
   // 主视图
   Widget _buildView() {
-    return const CustomScrollView(
-      slivers: [],
+    return CustomScrollView(
+      slivers: [
+        // 图片信息
+        _buildInfo().sliverToBoxAdapter(),
+      ],
     );
   }
 

@@ -43,13 +43,13 @@ class MusicDetailController extends GetxController {
     update(["music_detail"]);
   }
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
+  @override
+  void onInit() {
+    super.onInit();
 
-  //   // 读取缓存
-  //   _loadCache();
-  // }
+    // 读取缓存
+    _loadCache();
+  }
 
   @override
   void onReady() {

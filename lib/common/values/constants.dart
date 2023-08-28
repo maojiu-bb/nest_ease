@@ -35,4 +35,7 @@ class Constants {
 
   // 歌曲详情
   static const storageMusicDetail = 'music_detail';
+
+  // 音乐 url
+  static const storageMusicUrl = 'music_url';
 }

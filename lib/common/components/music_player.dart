@@ -1,15 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nestease_cloud_music/common/index.dart';
 
 class MusicPlayer extends StatelessWidget {
-  const MusicPlayer({Key? key}) : super(key: key);
+  // 是否播放
+  final RxBool isPlaying;
+
+  // 倍速
+  final String speed;
+
+  // 当前进度
+  final double progress;
+
+  // 总进度
+  final double maxProgress;
+
+  // 当前时长
+  final String currentTime;
+
+  //总时长
+  final String totalTime;
+
+  // 进度改变
+  final ValueChanged<double>? onProgressChanged;
+
+  // 改变播放类型
+  final VoidCallback onChangePlayMode;
+
+  // 上一首
+  final VoidCallback onPlayPrevious;
+
+  // 更换播放状态
+  final VoidCallback onPlayChange;
+
+  // 下一首
+  final VoidCallback onPlayNext;
+
+  // 菜单
+  final VoidCallback onMenuTap;
+
+  // 喜欢
+  final VoidCallback onLike;
+
+  // 下载
+  final VoidCallback onDownload;
+
+  // 更换倍速
+  final VoidCallback onSpeedChange;
+
+  const MusicPlayer({
+    Key? key,
+    required this.isPlaying,
+    required this.progress,
+    required this.maxProgress,
+    required this.onProgressChanged,
+    required this.onChangePlayMode,
+    required this.onPlayPrevious,
+    required this.onPlayNext,
+    required this.onMenuTap,
+    required this.onLike,
+    required this.onDownload,
+    required this.onPlayChange,
+    required this.onSpeedChange,
+    required this.speed,
+    required this.currentTime,
+    required this.totalTime,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return <Widget>[
       // 倍速
       <Widget>[
-        const TextWidget.body2('1.0x'),
+        TextWidget.body2(speed).onTap(onSpeedChange),
       ]
           .toRow(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -19,16 +82,16 @@ class MusicPlayer extends StatelessWidget {
       // slider
       Slider(
         min: 0,
-        max: 1,
-        value: 0.5,
+        max: maxProgress,
+        value: progress,
         activeColor: AppColors.secondary,
-        onChanged: (value) {},
+        onChanged: onProgressChanged,
       ),
 
       // 时长
       <Widget>[
-        const TextWidget.body2('02.03'),
-        const TextWidget.body2('04.06'),
+        TextWidget.body2(currentTime),
+        TextWidget.body2(totalTime),
       ]
           .toRow(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,6 +105,7 @@ class MusicPlayer extends StatelessWidget {
             Icons.shuffle,
             color: AppColors.onBackground,
           ),
+          onTap: onChangePlayMode,
         ),
         <Widget>[
           ButtonWidget.icon(
@@ -50,14 +114,19 @@ class MusicPlayer extends StatelessWidget {
               size: 40,
               color: AppColors.onBackground,
             ),
+            onTap: onPlayPrevious,
           ),
           ButtonWidget.icon(
-            Icon(
-              // Icons.pause_circle_filled
-              Icons.play_circle_fill,
-              size: 60,
-              color: AppColors.onBackground,
+            Obx(
+              () => Icon(
+                isPlaying.value == true
+                    ? Icons.pause_circle_filled
+                    : Icons.play_circle_fill,
+                size: 60,
+                color: AppColors.onBackground,
+              ),
             ),
+            onTap: onPlayChange,
           ),
           ButtonWidget.icon(
             Icon(
@@ -65,6 +134,7 @@ class MusicPlayer extends StatelessWidget {
               size: 40,
               color: AppColors.onBackground,
             ),
+            onTap: onPlayNext,
           ),
         ].toRow(),
         ButtonWidget.icon(
@@ -72,6 +142,7 @@ class MusicPlayer extends StatelessWidget {
             Icons.menu,
             color: AppColors.onBackground,
           ),
+          onTap: onMenuTap,
         ),
       ]
           .toRow(
@@ -86,12 +157,14 @@ class MusicPlayer extends StatelessWidget {
             Icons.favorite_border_outlined,
             color: AppColors.onBackground,
           ),
+          onTap: onLike,
         ),
         ButtonWidget.icon(
           Icon(
             Icons.file_download_outlined,
             color: AppColors.onBackground,
           ),
+          onTap: onDownload,
         ),
       ]
           .toRow(

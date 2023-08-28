@@ -69,12 +69,12 @@ class MusicApi {
   }
 
   // 获取音乐 url
-  static Future<List<MusicUrlModel>> musicUrl(int id, String? level) async {
+  static Future<List<MusicUrlModel>> musicUrl(int id, [String? level]) async {
     var res = await DioService.to.get(
       '/song/url/v1',
       params: {
         'id': id,
-        'level': level ?? 'exhigh',
+        'level': level ?? 'standard',
       },
     );
     List<MusicUrlModel> urlList = [];

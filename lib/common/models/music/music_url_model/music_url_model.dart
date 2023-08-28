@@ -11,7 +11,7 @@ class MusicUrlModel {
   int? expi;
   String? type;
   double? gain;
-  int? peak;
+  num? peak;
   int? fee;
   dynamic uf;
   int? payed;
@@ -66,7 +66,7 @@ class MusicUrlModel {
         expi: json['expi'] as int?,
         type: json['type'] as String?,
         gain: (json['gain'] as num?)?.toDouble(),
-        peak: json['peak'] as int?,
+        peak: json['peak'] as num?,
         fee: json['fee'] as int?,
         uf: json['uf'] as dynamic,
         payed: json['payed'] as int?,

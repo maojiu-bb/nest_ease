@@ -80,6 +80,27 @@ class MusicDetailPage extends GetView<MusicDetailController> {
         .paddingVertical(AppSpace.page);
   }
 
+  // 播放区域
+  Widget _buildAudioPlayer() {
+    return MusicPlayer(
+      isPlaying: AudioPlayerService.to.isPlaying,
+      speed: AudioPlayerService.to.speed,
+      progress: AudioPlayerService.to.progress,
+      maxProgress: 1,
+      currentTime: AudioPlayerService.to.currentTime,
+      totalTime: AudioPlayerService.to.totalTime,
+      onProgressChanged: controller.onProgressChanged,
+      onChangePlayMode: controller.onChangePlayMode,
+      onPlayPrevious: controller.onPlayPrevious,
+      onPlayChange: controller.onPlayChange,
+      onPlayNext: controller.onPlayNext,
+      onMenuTap: controller.onMenuTap,
+      onLike: controller.onLike,
+      onDownload: controller.onDownload,
+      onSpeedChange: controller.onSpeedChange,
+    );
+  }
+
   // 主视图
   Widget _buildView() {
     return CustomScrollView(
@@ -87,7 +108,8 @@ class MusicDetailPage extends GetView<MusicDetailController> {
         // 图片信息
         _buildInfo().sliverToBoxAdapter(),
 
-        const MusicPlayer().sliverToBoxAdapter()
+        // 播放区域
+        _buildAudioPlayer().sliverToBoxAdapter()
       ],
     );
   }

@@ -31,10 +31,13 @@ class MusicListController extends GetxController {
   void onStar() {}
 
   // 歌曲点击
-  void onMusicItemTap() {
+  void onMusicItemTap(int index) {
     Get.to(
       () => const MusicDetailPage(),
       transition: Transition.downToUp,
+      arguments: {
+        'id': musicList[index].id,
+      },
     );
   }
 

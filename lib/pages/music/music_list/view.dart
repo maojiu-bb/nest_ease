@@ -122,7 +122,7 @@ class MusicListPage extends GetView<MusicListController> {
           name: controller.musicList[i].name!,
           image: controller.musicList[i].al!.picUrl!,
           artist: controller.musicList[i].ar!.map((e) => e.name!).toList(),
-          onTap: controller.onMusicItemTap,
+          onTap: () => controller.onMusicItemTap(i),
           onDownload: controller.onDownload,
           onShowMore: controller.onShowMore,
           onLike: controller.onLike,

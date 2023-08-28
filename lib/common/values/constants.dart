@@ -32,4 +32,7 @@ class Constants {
 
   // 歌单所有歌曲
   static const storageMusicList = 'music_list';
+
+  // 歌曲详情
+  static const storageMusicDetail = 'music_detail';
 }

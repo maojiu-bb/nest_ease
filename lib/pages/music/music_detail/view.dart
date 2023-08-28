@@ -55,8 +55,8 @@ class MusicDetailPage extends GetView<MusicDetailController> {
       // 图片
       ImageWidget.url(
         controller.songDetail[0].al!.picUrl!,
-        width: 280,
-        height: 280,
+        width: 320,
+        height: 320,
         radius: 15,
       ),
       const SizedBox(height: 15),
@@ -76,7 +76,8 @@ class MusicDetailPage extends GetView<MusicDetailController> {
         .toColumn(
           mainAxisAlignment: MainAxisAlignment.center,
         )
-        .paddingHorizontal(AppSpace.page);
+        .paddingHorizontal(AppSpace.page)
+        .paddingVertical(AppSpace.page);
   }
 
   // 主视图
@@ -85,6 +86,8 @@ class MusicDetailPage extends GetView<MusicDetailController> {
       slivers: [
         // 图片信息
         _buildInfo().sliverToBoxAdapter(),
+
+        const MusicPlayer().sliverToBoxAdapter()
       ],
     );
   }

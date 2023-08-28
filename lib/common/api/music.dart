@@ -67,4 +67,21 @@ class MusicApi {
     }
     return detailList;
   }
+
+  // 获取音乐 url
+  static Future<List<MusicUrlModel>> musicUrl(int id, String? level) async {
+    var res = await DioService.to.get(
+      '/song/url/v1',
+      params: {
+        'id': id,
+        'level': level ?? 'exhigh',
+      },
+    );
+    List<MusicUrlModel> urlList = [];
+    for (var item in res.data['data']) {
+      urlList.add(MusicUrlModel.fromJson(item));
+    }
+
+    return urlList;
+  }
 }

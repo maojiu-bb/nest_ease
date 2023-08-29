@@ -24,7 +24,11 @@ class MusicDetailController extends GetxController {
   void onMoreDetail() {}
 
   // 进度条改变
-  void onProgressChanged(double value) {}
+  void onProgressChanged(double value) {
+    int durationInSeconds =
+        (AudioPlayerService.to.duration.value.inSeconds * value).round();
+    AudioPlayerService.to.jumpToPosition(durationInSeconds);
+  }
 
   // 改变播放模式
   void onChangePlayMode() {

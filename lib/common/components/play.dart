@@ -72,6 +72,8 @@ class _PlayWidgetState extends State<PlayWidget>
       <Widget>[
         // 上一首
         IconButton(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
           icon: const Icon(
             Icons.skip_previous,
           ),
@@ -92,6 +94,8 @@ class _PlayWidgetState extends State<PlayWidget>
 
         // 下一首
         IconButton(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
           icon: const Icon(
             Icons.skip_next,
           ),

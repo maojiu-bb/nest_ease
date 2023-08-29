@@ -81,5 +81,9 @@ class RoutePages {
       name: RouteNames.vedioVedioIndex,
       page: () => const VedioIndexPage(),
     ),
+    GetPage(
+      name: RouteNames.playbar,
+      page: () => const PlaybarPage(),
+    ),
   ];
 }

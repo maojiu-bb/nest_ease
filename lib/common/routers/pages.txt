@@ -12,6 +12,10 @@
         page: () => const MusicListPage(),
       ),
       GetPage(
+        name: RouteNames.playbar,
+        page: () => const PlaybarPage(),
+      ),
+      GetPage(
         name: RouteNames.radioRadioDetail,
         page: () => const RadioDetailPage(),
       ),

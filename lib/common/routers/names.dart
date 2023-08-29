@@ -17,4 +17,5 @@ class RouteNames {
   static const userUserIndex = '/user_user_index';
   static const vedioVedioDetail = '/vedio_vedio_detail';
   static const vedioVedioIndex = '/vedio_vedio_index';
+  static const playbar = '/playbar';
 }

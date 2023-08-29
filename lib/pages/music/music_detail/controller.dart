@@ -1,10 +1,12 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:nestease_cloud_music/common/index.dart';
+import 'package:nestease_cloud_music/pages/index.dart';
 
 class MusicDetailController extends GetxController {
   MusicDetailController();
+
+  final PlaybarController _playbarController = Get.find();
 
   // 获取 id
   final musicId = Get.arguments['id'];
@@ -75,14 +77,18 @@ class MusicDetailController extends GetxController {
   _initData() async {
     // 歌曲详情
     songDetail = await MusicApi.songDetail(musicId);
+    AudioPlayerService.to.songDetail = songDetail;
 
     // 音乐 url
     var musicUrl = await MusicApi.musicUrl(musicId);
+    AudioPlayerService.to.musicUrl = musicUrl;
     AudioPlayerService.to.init();
     AudioPlayerService.to.playMusic(musicUrl[0].url!);
 
     // 离线存储
     Storage().setJson(Constants.storageMusicDetail, songDetail);
+
+    _playbarController.initData();
 
     update(["music_detail"]);
   }

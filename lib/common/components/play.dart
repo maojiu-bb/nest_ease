@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:nestease_cloud_music/common/index.dart';
 
 class PlayWidget extends StatefulWidget {
+  // 是否播放
+  final RxBool isPlaying;
+
   // 图片
   final String image;
 
@@ -18,6 +22,9 @@ class PlayWidget extends StatefulWidget {
   // 上一首
   final VoidCallback onPrevious;
 
+  // 去详情页面
+  final VoidCallback onDetailTap;
+
   const PlayWidget({
     Key? key,
     required this.image,
@@ -25,6 +32,8 @@ class PlayWidget extends StatefulWidget {
     required this.onPlay,
     required this.onNext,
     required this.onPrevious,
+    required this.isPlaying,
+    required this.onDetailTap,
   }) : super(key: key);
 
   @override
@@ -55,8 +64,9 @@ class _PlayWidgetState extends State<PlayWidget>
         TextWidget.body2(
           widget.name,
           size: 14,
-        ),
-      ].toRow(),
+          overflow: TextOverflow.fade,
+        ).tight(width: 160),
+      ].toRow().onTap(widget.onDetailTap),
 
       // 操作区域
       <Widget>[
@@ -69,11 +79,15 @@ class _PlayWidgetState extends State<PlayWidget>
         ),
 
         // 播放
-        IconButton(
-          icon: const Icon(
-            Icons.play_arrow,
+        Obx(
+          () => IconButton(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            icon: Icon(
+              widget.isPlaying.value == true ? Icons.pause : Icons.play_arrow,
+            ),
+            onPressed: widget.onPlay,
           ),
-          onPressed: widget.onPlay,
         ),
 
         // 下一首

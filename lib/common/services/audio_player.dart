@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:nestease_cloud_music/common/index.dart';
 
 /// 播放状态枚举
 enum AudioPlayerState {
@@ -38,6 +39,12 @@ class AudioPlayerService extends GetxService {
 
   // speed
   String speed = '1.0x';
+
+  // 当前歌曲的信息
+  List<SongDetailModel> songDetail = <SongDetailModel>[].obs;
+
+  // 当前歌曲 URL
+  List<MusicUrlModel> musicUrl = <MusicUrlModel>[].obs;
 
   void initState() {
     audioPlayer.onPlayerStateChanged.listen((PlayerState state) {

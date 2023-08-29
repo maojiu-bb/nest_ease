@@ -2,7 +2,7 @@ class L {
   int? br;
   int? fid;
   int? size;
-  int? vd;
+  num? vd;
   int? sr;
 
   L({this.br, this.fid, this.size, this.vd, this.sr});
@@ -11,7 +11,7 @@ class L {
         br: json['br'] as int?,
         fid: json['fid'] as int?,
         size: json['size'] as int?,
-        vd: json['vd'] as int?,
+        vd: json['vd'] as num?,
         sr: json['sr'] as int?,
       );
 

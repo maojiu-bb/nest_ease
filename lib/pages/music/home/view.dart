@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nestease_cloud_music/common/index.dart';
+import 'package:nestease_cloud_music/pages/index.dart';
 
 import 'index.dart';
 
@@ -256,19 +257,7 @@ class HomePage extends GetView<HomeController> {
               ),
 
               // 固定在底部的 PlayWidget
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 90,
-                child: PlayWidget(
-                  image:
-                      'https://p2.music.126.net/kT4AECoc13oVKLEg_-eFMA==/109951166578436098.jpg',
-                  name: '指纹',
-                  onPlay: () => {},
-                  onNext: () => {},
-                  onPrevious: () => {},
-                ),
-              ),
+              const PlaybarPage(),
             ],
           ),
         );

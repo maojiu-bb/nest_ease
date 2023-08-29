@@ -388,6 +388,7 @@ class ButtonWidget extends StatelessWidget {
   // 阴影颜色
   MaterialStateProperty<Color?>? get _overlayColor {
     switch (type) {
+      case ButtonWidgetType.icon:
       case ButtonWidgetType.primary:
         return null;
       default:

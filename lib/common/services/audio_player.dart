@@ -22,6 +22,9 @@ class AudioPlayerService extends GetxService {
   // 是否播放
   RxBool isPlaying = false.obs;
 
+  // 是否循环播放
+  RxBool isLoop = false.obs;
+
   // progress
   RxDouble progress = 0.0.obs;
 
@@ -42,7 +45,6 @@ class AudioPlayerService extends GetxService {
     });
 
     audioPlayer.onDurationChanged.listen((Duration audioDuration) {
-      print(audioDuration);
       duration.value = audioDuration;
       totalTime.value = _formatTime(audioDuration);
     });
@@ -102,8 +104,15 @@ class AudioPlayerService extends GetxService {
   }
 
   // 设置循环模式
-  void setPlayMode() {
+  void setLoopPlayMode() {
     audioPlayer.setReleaseMode(ReleaseMode.loop);
+    isLoop.value = true;
+  }
+
+  // 设置随机模式
+  void setReleasePlayMode() {
+    audioPlayer.setReleaseMode(ReleaseMode.release);
+    isLoop.value = false;
   }
 
   // 上一首

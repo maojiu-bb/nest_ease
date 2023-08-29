@@ -6,6 +6,9 @@ class MusicPlayer extends StatelessWidget {
   // 是否播放
   final RxBool isPlaying;
 
+  // 是否循环
+  final RxBool isLoop;
+
   // 倍速
   final String speed;
 
@@ -65,6 +68,7 @@ class MusicPlayer extends StatelessWidget {
     required this.speed,
     required this.currentTime,
     required this.totalTime,
+    required this.isLoop,
   }) : super(key: key);
 
   @override
@@ -107,9 +111,11 @@ class MusicPlayer extends StatelessWidget {
       // 操作区域
       <Widget>[
         ButtonWidget.icon(
-          Icon(
-            Icons.shuffle,
-            color: AppColors.onBackground,
+          Obx(
+            () => Icon(
+              isLoop.value == true ? Icons.compare_arrows_sharp : Icons.shuffle,
+              color: AppColors.onBackground,
+            ),
           ),
           onTap: onChangePlayMode,
         ),

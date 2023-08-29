@@ -84,6 +84,7 @@ class MusicDetailPage extends GetView<MusicDetailController> {
   Widget _buildAudioPlayer() {
     return MusicPlayer(
       isPlaying: AudioPlayerService.to.isPlaying,
+      isLoop: AudioPlayerService.to.isLoop,
       speed: AudioPlayerService.to.speed,
       progress: AudioPlayerService.to.progress,
       maxProgress: 1,

@@ -25,7 +25,13 @@ class MusicDetailController extends GetxController {
   void onProgressChanged(double value) {}
 
   // 改变播放模式
-  void onChangePlayMode() {}
+  void onChangePlayMode() {
+    if (AudioPlayerService.to.isLoop.value == true) {
+      AudioPlayerService.to.setReleasePlayMode();
+    } else {
+      AudioPlayerService.to.setLoopPlayMode();
+    }
+  }
 
   // 上一首
   void onPlayPrevious() {}

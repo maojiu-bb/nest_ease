@@ -1,6 +1,6 @@
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
-import 'package:nestease_cloud_music/common/routers/index.dart';
+import 'package:nestease_cloud_music/common/index.dart';
 
 class SplashController extends GetxController {
   SplashController();

@@ -72,6 +72,7 @@ class MusicDetailController extends GetxController {
 
     // 音乐 url
     var musicUrl = await MusicApi.musicUrl(musicId);
+    AudioPlayerService.to.init();
     AudioPlayerService.to.playMusic(musicUrl[0].url!);
 
     // 离线存储

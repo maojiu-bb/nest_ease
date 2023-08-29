@@ -10,16 +10,16 @@ class MusicPlayer extends StatelessWidget {
   final String speed;
 
   // 当前进度
-  final double progress;
+  final RxDouble progress;
 
   // 总进度
   final double maxProgress;
 
   // 当前时长
-  final String currentTime;
+  final RxString currentTime;
 
   //总时长
-  final String totalTime;
+  final RxString totalTime;
 
   // 进度改变
   final ValueChanged<double>? onProgressChanged;
@@ -80,18 +80,24 @@ class MusicPlayer extends StatelessWidget {
           .tight(width: 315),
 
       // slider
-      Slider(
-        min: 0,
-        max: maxProgress,
-        value: progress,
-        activeColor: AppColors.secondary,
-        onChanged: onProgressChanged,
+      Obx(
+        () => Slider(
+          min: 0,
+          max: maxProgress,
+          value: progress.value,
+          activeColor: AppColors.secondary,
+          onChanged: onProgressChanged,
+        ),
       ),
 
       // 时长
       <Widget>[
-        TextWidget.body2(currentTime),
-        TextWidget.body2(totalTime),
+        Obx(
+          () => TextWidget.body2(currentTime.value),
+        ),
+        Obx(
+          () => TextWidget.body2(totalTime.value),
+        ),
       ]
           .toRow(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

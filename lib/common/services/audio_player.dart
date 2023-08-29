@@ -23,29 +23,36 @@ class AudioPlayerService extends GetxService {
   RxBool isPlaying = false.obs;
 
   // progress
-  double progress = 0.0;
+  RxDouble progress = 0.0.obs;
 
   // current time
-  String currentTime = '00:00';
+  RxString currentTime = '00:00'.obs;
 
   // total time
-  String totalTime = '00:00';
+  RxString totalTime = '00:00'.obs;
+
+  Rx<Duration> duration = Duration.zero.obs;
 
   // speed
   String speed = '1.0x';
 
   void initState() {
-    audioPlayer.onDurationChanged.listen((Duration duration) {
-      totalTime = _formatTime(duration);
+    audioPlayer.onPlayerStateChanged.listen((PlayerState state) {
+      audioPlayerState = _convertToAudioPlayerState(state);
+    });
+
+    audioPlayer.onDurationChanged.listen((Duration audioDuration) {
+      print(audioDuration);
+      duration.value = audioDuration;
+      totalTime.value = _formatTime(audioDuration);
     });
 
     audioPlayer.onPositionChanged.listen((Duration position) {
-      progress = position.inMilliseconds.toDouble();
-      currentTime = _formatTime(position);
-    });
-
-    audioPlayer.onPlayerStateChanged.listen((PlayerState state) {
-      audioPlayerState = _convertToAudioPlayerState(state);
+      if (duration.value.inMilliseconds > 0) {
+        progress.value = position.inMilliseconds.toDouble() /
+            duration.value.inMilliseconds.toDouble();
+        currentTime.value = _formatTime(position);
+      }
     });
   }
 
@@ -80,6 +87,23 @@ class AudioPlayerService extends GetxService {
   void setVolume(double volume) {
     audioPlayer.setVolume(volume);
     volume = volume;
+  }
+
+  // 跳到指定位置
+  void jumpToPosition(int value) {
+    audioPlayer.seek(
+      Duration(seconds: value),
+    );
+  }
+
+  // 设置速度
+  void setPlaySpeed(double speed) {
+    audioPlayer.setPlaybackRate(speed);
+  }
+
+  // 设置循环模式
+  void setPlayMode() {
+    audioPlayer.setReleaseMode(ReleaseMode.loop);
   }
 
   // 上一首

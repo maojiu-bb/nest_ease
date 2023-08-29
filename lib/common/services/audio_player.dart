@@ -61,6 +61,11 @@ class AudioPlayerService extends GetxService {
         progress.value = position.inMilliseconds.toDouble() /
             duration.value.inMilliseconds.toDouble();
         currentTime.value = _formatTime(position);
+        if (currentTime.value == totalTime.value) {
+          if (isLoop.value == false) {
+            isPlaying.value = false;
+          }
+        }
       }
     });
   }

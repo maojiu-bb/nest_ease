@@ -79,6 +79,9 @@ class MusicDetailController extends GetxController {
 
   // 初始化
   _initData() async {
+    // 获取上一个页面的路由名称
+    final previousRoute = Get.routing.previous;
+
     // 歌曲详情
     songDetail = await MusicApi.songDetail(musicId);
     AudioPlayerService.to.songDetail = songDetail;
@@ -87,7 +90,16 @@ class MusicDetailController extends GetxController {
     var musicUrl = await MusicApi.musicUrl(musicId);
     AudioPlayerService.to.musicUrl = musicUrl;
     AudioPlayerService.to.init();
-    AudioPlayerService.to.playMusic(musicUrl[0].url!);
+
+    if (previousRoute == '/music_music_list') {
+      AudioPlayerService.to.playMusic(musicUrl[0].url!);
+    } else {
+      if (AudioPlayerService.to.isPlaying.value == true) {
+        AudioPlayerService.to.continueMusic();
+      } else {
+        AudioPlayerService.to.pauseMusic();
+      }
+    }
 
     // 离线存储
     Storage().setJson(Constants.storageMusicDetail, songDetail);

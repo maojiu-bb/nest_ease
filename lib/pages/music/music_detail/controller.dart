@@ -14,6 +14,9 @@ class MusicDetailController extends GetxController {
   // 详情
   List<SongDetailModel> songDetail = [];
 
+  // music url
+  List<MusicUrlModel> musicUrls = [];
+
   // 歌词
   void onLyrics() {}
 
@@ -47,7 +50,11 @@ class MusicDetailController extends GetxController {
     if (AudioPlayerService.to.isPlaying.value == true) {
       AudioPlayerService.to.pauseMusic();
     } else {
-      AudioPlayerService.to.continueMusic();
+      if (AudioPlayerService.to.duration.value == Duration.zero) {
+        AudioPlayerService.to.playMusic(musicUrls[0].url!);
+      } else {
+        AudioPlayerService.to.continueMusic();
+      }
     }
   }
 
@@ -70,9 +77,17 @@ class MusicDetailController extends GetxController {
   Future<void> _loadCache() async {
     var stringSongDetail = Storage().getString(Constants.storageMusicDetail);
 
+    var stringMusicUrl = Storage().getString(Constants.storageMusicUrl);
+
     songDetail = stringSongDetail != " "
         ? jsonDecode(stringSongDetail).map<SongDetailModel>((item) {
             return SongDetailModel.fromJson(item);
+          }).toList()
+        : [];
+
+    musicUrls = stringMusicUrl != " "
+        ? jsonDecode(stringMusicUrl).map<MusicUrlModel>((item) {
+            return MusicUrlModel.fromJson(item);
           }).toList()
         : [];
   }
@@ -88,11 +103,12 @@ class MusicDetailController extends GetxController {
 
     // 音乐 url
     var musicUrl = await MusicApi.musicUrl(musicId);
+    musicUrls = musicUrl;
     AudioPlayerService.to.musicUrl = musicUrl;
     AudioPlayerService.to.init();
 
-    if (previousRoute == '/music_music_list') {
-      AudioPlayerService.to.playMusic(musicUrl[0].url!);
+    if (previousRoute == RouteNames.musicMusicList) {
+      AudioPlayerService.to.playMusic(musicUrls[0].url!);
     } else {
       if (AudioPlayerService.to.isPlaying.value == true) {
         AudioPlayerService.to.continueMusic();
@@ -103,6 +119,8 @@ class MusicDetailController extends GetxController {
 
     // 离线存储
     Storage().setJson(Constants.storageMusicDetail, songDetail);
+
+    Storage().setJson(Constants.storageMusicUrl, musicUrls);
 
     _playbarController.initData();
 

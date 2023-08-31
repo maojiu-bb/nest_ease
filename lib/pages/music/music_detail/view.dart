@@ -85,7 +85,6 @@ class MusicDetailPage extends GetView<MusicDetailController> {
     return MusicPlayer(
       isPlaying: AudioPlayerService.to.isPlaying,
       isLoop: AudioPlayerService.to.isLoop,
-      speed: AudioPlayerService.to.speed,
       progress: AudioPlayerService.to.progress,
       maxProgress: 1,
       currentTime: AudioPlayerService.to.currentTime,
@@ -98,7 +97,6 @@ class MusicDetailPage extends GetView<MusicDetailController> {
       onMenuTap: controller.onMenuTap,
       onLike: controller.onLike,
       onDownload: controller.onDownload,
-      onSpeedChange: controller.onSpeedChange,
     );
   }
 

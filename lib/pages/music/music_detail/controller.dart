@@ -70,9 +70,6 @@ class MusicDetailController extends GetxController {
   // 下载
   void onDownload() {}
 
-  // 更改速度
-  void onSpeedChange() {}
-
   // 读取缓存
   Future<void> _loadCache() async {
     var stringSongDetail = Storage().getString(Constants.storageMusicDetail);

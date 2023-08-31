@@ -9,9 +9,6 @@ class MusicPlayer extends StatelessWidget {
   // 是否循环
   final RxBool isLoop;
 
-  // 倍速
-  final String speed;
-
   // 当前进度
   final RxDouble progress;
 
@@ -48,9 +45,6 @@ class MusicPlayer extends StatelessWidget {
   // 下载
   final VoidCallback onDownload;
 
-  // 更换倍速
-  final VoidCallback onSpeedChange;
-
   const MusicPlayer({
     Key? key,
     required this.isPlaying,
@@ -64,8 +58,6 @@ class MusicPlayer extends StatelessWidget {
     required this.onLike,
     required this.onDownload,
     required this.onPlayChange,
-    required this.onSpeedChange,
-    required this.speed,
     required this.currentTime,
     required this.totalTime,
     required this.isLoop,
@@ -74,15 +66,6 @@ class MusicPlayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return <Widget>[
-      // 倍速
-      <Widget>[
-        TextWidget.body2(speed).onTap(onSpeedChange),
-      ]
-          .toRow(
-            mainAxisAlignment: MainAxisAlignment.end,
-          )
-          .tight(width: 315),
-
       // slider
       Obx(
         () => Slider(

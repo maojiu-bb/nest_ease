@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nestease_cloud_music/common/index.dart';
 import 'package:nestease_cloud_music/pages/index.dart';
+import 'package:nestease_cloud_music/pages/music/music_detail/widgets/index.dart';
 
 class MusicDetailController extends GetxController {
   MusicDetailController();
@@ -16,6 +18,9 @@ class MusicDetailController extends GetxController {
 
   // music url
   List<MusicUrlModel> musicUrls = [];
+
+  // music list
+  List<SongListMusicModel> musicList = [];
 
   // 歌词
   void onLyrics() {}
@@ -62,7 +67,31 @@ class MusicDetailController extends GetxController {
   void onPlayNext() {}
 
   // 播放列表
-  void onMenuTap() {}
+  void onMenuTap() {
+    Get.bottomSheet(
+      <Widget>[
+        const TextWidget.title3('播放列表').paddingBottom(AppSpace.listRow),
+        <Widget>[
+          for (int i = 0; i < musicList.length; i++)
+            MusicItemWidget(
+              image: musicList[i].al!.picUrl!,
+              name: musicList[i].name!,
+              artists: musicList[i].ar!.map((e) => e.name!).toList(),
+              onRemove: () {},
+              onTap: () {},
+            ),
+        ].toListView().expanded(),
+      ]
+          .toColumn()
+          .paddingVertical(
+            AppSpace.page,
+          )
+          .paddingHorizontal(
+            AppSpace.page,
+          ),
+      backgroundColor: AppColors.background,
+    );
+  }
 
   // 喜欢
   void onLike() {}
@@ -76,6 +105,8 @@ class MusicDetailController extends GetxController {
 
     var stringMusicUrl = Storage().getString(Constants.storageMusicUrl);
 
+    var stringMusicList = Storage().getString(Constants.storageMusicList);
+
     songDetail = stringSongDetail != " "
         ? jsonDecode(stringSongDetail).map<SongDetailModel>((item) {
             return SongDetailModel.fromJson(item);
@@ -85,6 +116,12 @@ class MusicDetailController extends GetxController {
     musicUrls = stringMusicUrl != " "
         ? jsonDecode(stringMusicUrl).map<MusicUrlModel>((item) {
             return MusicUrlModel.fromJson(item);
+          }).toList()
+        : [];
+
+    musicList = stringMusicList != " "
+        ? jsonDecode(stringMusicList).map<SongListMusicModel>((item) {
+            return SongListMusicModel.fromJson(item);
           }).toList()
         : [];
   }

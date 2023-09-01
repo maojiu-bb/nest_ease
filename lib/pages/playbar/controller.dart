@@ -37,6 +37,11 @@ class PlaybarController extends GetxController {
       initMusicPlayer(
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
       ).whenComplete(() => update(['playbar']));
+    } else {
+      AudioPlayerService.to.setCurrentIndex(musicList.length - 1);
+      initMusicPlayer(
+        id: musicList[AudioPlayerService.to.currentIndex.value].id!,
+      ).whenComplete(() => update(['playbar']));
     }
   }
 
@@ -45,6 +50,11 @@ class PlaybarController extends GetxController {
     int index = AudioPlayerService.to.currentIndex.value;
     if (index < musicList.length - 1) {
       AudioPlayerService.to.setCurrentIndex(index + 1);
+      initMusicPlayer(
+        id: musicList[AudioPlayerService.to.currentIndex.value].id!,
+      ).whenComplete(() => update(['playbar']));
+    } else {
+      AudioPlayerService.to.setCurrentIndex(0);
       initMusicPlayer(
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
       ).whenComplete(() => update(['playbar']));

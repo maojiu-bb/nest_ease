@@ -56,6 +56,12 @@ class MusicDetailController extends GetxController {
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
         isPreviousOrNext: true,
       ).whenComplete(() => update(['music_detail']));
+    } else {
+      AudioPlayerService.to.setCurrentIndex(musicList.length - 1);
+      initMusicPlayer(
+        id: musicList[AudioPlayerService.to.currentIndex.value].id!,
+        isPreviousOrNext: true,
+      ).whenComplete(() => update(['music_detail']));
     }
   }
 
@@ -77,6 +83,12 @@ class MusicDetailController extends GetxController {
     int index = AudioPlayerService.to.currentIndex.value;
     if (index < musicList.length - 1) {
       AudioPlayerService.to.setCurrentIndex(index + 1);
+      initMusicPlayer(
+        id: musicList[AudioPlayerService.to.currentIndex.value].id!,
+        isPreviousOrNext: true,
+      ).whenComplete(() => update(['music_detail']));
+    } else {
+      AudioPlayerService.to.setCurrentIndex(0);
       initMusicPlayer(
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
         isPreviousOrNext: true,

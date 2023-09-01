@@ -95,6 +95,7 @@ class MusicDetailController extends GetxController {
               image: musicList[i].al!.picUrl!,
               name: musicList[i].name!,
               artists: musicList[i].ar!.map((e) => e.name!).toList(),
+              isActive: i == AudioPlayerService.to.currentIndex.value,
               onRemove: () {},
               onTap: () {},
             ),

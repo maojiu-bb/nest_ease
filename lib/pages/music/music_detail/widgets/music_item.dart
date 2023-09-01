@@ -11,6 +11,9 @@ class MusicItemWidget extends StatelessWidget {
   // artist
   final List<String> artists;
 
+  // active
+  final bool isActive;
+
   // onRemove
   final VoidCallback onRemove;
 
@@ -24,6 +27,7 @@ class MusicItemWidget extends StatelessWidget {
     required this.artists,
     required this.onRemove,
     required this.onTap,
+    required this.isActive,
   }) : super(key: key);
 
   @override
@@ -49,8 +53,12 @@ class MusicItemWidget extends StatelessWidget {
         ),
         onTap: onRemove,
       )
-    ].toRow(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    );
+    ]
+        .toRow(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        )
+        .backgroundColor(
+          isActive ? AppColors.highlight : AppColors.background,
+        );
   }
 }

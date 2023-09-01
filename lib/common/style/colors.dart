@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 /// 颜色
 class AppColors {
   // 强调色
-  // static Color get highlight => Color()
+  static Color get highlight => Get.theme.colorScheme.surfaceVariant;
+
   static Brightness get brightness => Get.theme.colorScheme.brightness;
 
   static Color get background => Get.theme.colorScheme.background;

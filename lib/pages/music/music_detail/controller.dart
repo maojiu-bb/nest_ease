@@ -48,20 +48,22 @@ class MusicDetailController extends GetxController {
   }
 
   // 上一首
-  void onPlayPrevious() {
+  Future<void> onPlayPrevious() async {
     int index = AudioPlayerService.to.currentIndex.value;
     if (index > 0) {
       AudioPlayerService.to.setCurrentIndex(index - 1);
-      initMusicPlayer(
+      await initMusicPlayer(
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
         isPreviousOrNext: true,
-      ).whenComplete(() => update(['music_detail']));
+      );
+      update(['music_detail']);
     } else {
       AudioPlayerService.to.setCurrentIndex(musicList.length - 1);
-      initMusicPlayer(
+      await initMusicPlayer(
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
         isPreviousOrNext: true,
-      ).whenComplete(() => update(['music_detail']));
+      );
+      update(['music_detail']);
     }
   }
 
@@ -79,20 +81,22 @@ class MusicDetailController extends GetxController {
   }
 
   // 下一首
-  void onPlayNext() {
+  Future<void> onPlayNext() async {
     int index = AudioPlayerService.to.currentIndex.value;
     if (index < musicList.length - 1) {
       AudioPlayerService.to.setCurrentIndex(index + 1);
-      initMusicPlayer(
+      await initMusicPlayer(
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
         isPreviousOrNext: true,
-      ).whenComplete(() => update(['music_detail']));
+      );
+      update(['music_detail']);
     } else {
       AudioPlayerService.to.setCurrentIndex(0);
-      initMusicPlayer(
+      await initMusicPlayer(
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
         isPreviousOrNext: true,
-      ).whenComplete(() => update(['music_detail']));
+      );
+      update(['music_detail']);
     }
   }
 
@@ -217,6 +221,10 @@ class MusicDetailController extends GetxController {
 
     // 读取缓存
     _loadCache();
+
+    AudioPlayerService.to.audioPlayer.onPlayerComplete.listen((event) {
+      onPlayNext();
+    });
   }
 
   @override

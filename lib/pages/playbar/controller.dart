@@ -13,6 +13,9 @@ class PlaybarController extends GetxController {
   // music url
   List<MusicUrlModel> musicUrls = [];
 
+  // music list
+  List<SongListMusicModel> musicList = [];
+
   // 更改播放
   void onPlayChanged() {
     if (AudioPlayerService.to.isPlaying.value == true) {
@@ -24,6 +27,47 @@ class PlaybarController extends GetxController {
         AudioPlayerService.to.continueMusic();
       }
     }
+  }
+
+  // 上一首
+  void onPlayPrevious() {
+    int index = AudioPlayerService.to.currentIndex.value;
+    if (index > 0) {
+      AudioPlayerService.to.setCurrentIndex(index - 1);
+      initMusicPlayer(
+        id: musicList[AudioPlayerService.to.currentIndex.value].id!,
+      ).whenComplete(() => update(['playbar']));
+    }
+  }
+
+  // 下一首
+  void onPlayNext() {
+    int index = AudioPlayerService.to.currentIndex.value;
+    if (index < musicList.length - 1) {
+      AudioPlayerService.to.setCurrentIndex(index + 1);
+      initMusicPlayer(
+        id: musicList[AudioPlayerService.to.currentIndex.value].id!,
+      ).whenComplete(() => update(['playbar']));
+    }
+  }
+
+  // 播放歌曲
+  Future<void> initMusicPlayer({required int id}) async {
+    // 歌曲详情
+    songDetail = await MusicApi.songDetail(id);
+    AudioPlayerService.to.songDetail = songDetail;
+
+    // 音乐 url
+    var musicUrl = await MusicApi.musicUrl(id);
+    musicUrls = musicUrl;
+    AudioPlayerService.to.musicUrl = musicUrl;
+    AudioPlayerService.to.init();
+
+    AudioPlayerService.to.playMusic(musicUrls[0].url!);
+    // 离线存储
+    Storage().setJson(Constants.storageMusicDetail, songDetail);
+
+    Storage().setJson(Constants.storageMusicUrl, musicUrls);
   }
 
   // 前往详情
@@ -59,6 +103,8 @@ class PlaybarController extends GetxController {
   }
 
   initData() {
+    musicList = AudioPlayerService.to.musicList;
+
     update(["playbar"]);
   }
 

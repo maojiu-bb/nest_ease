@@ -11,7 +11,7 @@ class MusicDetailController extends GetxController {
   final PlaybarController _playbarController = Get.find();
 
   // 获取 id
-  final musicId = Get.arguments['id'];
+  late final musicId = Get.arguments['id'];
 
   // 详情
   List<SongDetailModel> songDetail = [];
@@ -48,7 +48,16 @@ class MusicDetailController extends GetxController {
   }
 
   // 上一首
-  void onPlayPrevious() {}
+  void onPlayPrevious() {
+    int index = AudioPlayerService.to.currentIndex.value;
+    if (index > 0) {
+      AudioPlayerService.to.setCurrentIndex(index - 1);
+      initMusicPlayer(
+        id: musicList[AudioPlayerService.to.currentIndex.value].id!,
+        isPreviousOrNext: true,
+      ).whenComplete(() => update(['music_detail']));
+    }
+  }
 
   // 播放改变
   void onPlayChange() {
@@ -64,7 +73,16 @@ class MusicDetailController extends GetxController {
   }
 
   // 下一首
-  void onPlayNext() {}
+  void onPlayNext() {
+    int index = AudioPlayerService.to.currentIndex.value;
+    if (index < musicList.length - 1) {
+      AudioPlayerService.to.setCurrentIndex(index + 1);
+      initMusicPlayer(
+        id: musicList[AudioPlayerService.to.currentIndex.value].id!,
+        isPreviousOrNext: true,
+      ).whenComplete(() => update(['music_detail']));
+    }
+  }
 
   // 播放列表
   void onMenuTap() {
@@ -99,6 +117,15 @@ class MusicDetailController extends GetxController {
   // 下载
   void onDownload() {}
 
+  // 初始 current index
+  void onSetCurrentIndex() {
+    for (int i = 0; i < musicList.length; i++) {
+      if (musicList[i].id == musicId) {
+        AudioPlayerService.to.setCurrentIndex(i);
+      }
+    }
+  }
+
   // 读取缓存
   Future<void> _loadCache() async {
     var stringSongDetail = Storage().getString(Constants.storageMusicDetail);
@@ -126,22 +153,24 @@ class MusicDetailController extends GetxController {
         : [];
   }
 
-  // 初始化
-  _initData() async {
+  // 播放歌曲
+  Future<void> initMusicPlayer(
+      {required int id, required bool isPreviousOrNext}) async {
     // 获取上一个页面的路由名称
     final previousRoute = Get.routing.previous;
 
     // 歌曲详情
-    songDetail = await MusicApi.songDetail(musicId);
+    songDetail = await MusicApi.songDetail(id);
     AudioPlayerService.to.songDetail = songDetail;
 
     // 音乐 url
-    var musicUrl = await MusicApi.musicUrl(musicId);
+    var musicUrl = await MusicApi.musicUrl(id);
     musicUrls = musicUrl;
     AudioPlayerService.to.musicUrl = musicUrl;
     AudioPlayerService.to.init();
 
-    if (previousRoute == RouteNames.musicMusicList) {
+    if (previousRoute == RouteNames.musicMusicList ||
+        isPreviousOrNext == true) {
       AudioPlayerService.to.playMusic(musicUrls[0].url!);
     } else {
       if (AudioPlayerService.to.isPlaying.value == true) {
@@ -157,6 +186,14 @@ class MusicDetailController extends GetxController {
     Storage().setJson(Constants.storageMusicUrl, musicUrls);
 
     _playbarController.initData();
+  }
+
+  // 初始化
+  _initData() async {
+    await initMusicPlayer(id: musicId, isPreviousOrNext: false);
+
+    // 初始 current index
+    onSetCurrentIndex();
 
     update(["music_detail"]);
   }

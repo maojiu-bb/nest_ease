@@ -26,8 +26,8 @@ class PlaybarPage extends GetView<PlaybarController> {
             ? AudioPlayerService.to.songDetail[0].name!
             : controller.songDetail[0].name!,
         onPlay: controller.onPlayChanged,
-        onNext: () => {},
-        onPrevious: () => {},
+        onNext: controller.onPlayNext,
+        onPrevious: controller.onPlayPrevious,
         onDetailTap: controller.onDetailTap,
       ),
     );

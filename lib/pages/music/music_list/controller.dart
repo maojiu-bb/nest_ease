@@ -68,6 +68,8 @@ class MusicListController extends GetxController {
       SongListRequest(id: songList.id),
     );
 
+    AudioPlayerService.to.musicList = musicList;
+
     // 离线存储
     Storage().setJson(Constants.storageMusicList, musicList);
 

@@ -46,6 +46,17 @@ class AudioPlayerService extends GetxService {
   // 当前歌曲 URL
   List<MusicUrlModel> musicUrl = <MusicUrlModel>[].obs;
 
+  // 歌曲列表
+  List<SongListMusicModel> musicList = <SongListMusicModel>[].obs;
+
+  // 播放索引
+  RxInt currentIndex = 0.obs;
+
+  // 设置索引
+  void setCurrentIndex(int index) {
+    currentIndex.value = index;
+  }
+
   void initState() {
     audioPlayer.onPlayerStateChanged.listen((PlayerState state) {
       audioPlayerState = _convertToAudioPlayerState(state);

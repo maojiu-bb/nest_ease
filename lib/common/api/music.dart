@@ -84,4 +84,17 @@ class MusicApi {
 
     return urlList;
   }
+
+  // 获取歌词
+  static Future<LyricModel> lyric(int id) async {
+    var res = await DioService.to.get(
+      '/lyric',
+      params: {
+        'id': id,
+      },
+    );
+    var lyricResult = LyricModel.fromJson(res.data);
+
+    return lyricResult;
+  }
 }

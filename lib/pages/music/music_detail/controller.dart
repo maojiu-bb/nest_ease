@@ -21,6 +21,9 @@ class MusicDetailController extends GetxController {
   List<SongListMusicModel> musicList = [];
 
   // 歌词
+  LyricModel musicLyric = LyricModel();
+
+  // 歌词
   void onLyrics() {}
 
   // 分享
@@ -131,6 +134,8 @@ class MusicDetailController extends GetxController {
 
     var stringMusicList = Storage().getString(Constants.storageMusicList);
 
+    var stringMusicLyric = Storage().getString(Constants.storageMusicLyric);
+
     songDetail = stringSongDetail != " "
         ? jsonDecode(stringSongDetail).map<SongDetailModel>((item) {
             return SongDetailModel.fromJson(item);
@@ -148,6 +153,10 @@ class MusicDetailController extends GetxController {
             return SongListMusicModel.fromJson(item);
           }).toList()
         : [];
+
+    musicLyric = stringMusicLyric != " "
+        ? LyricModel.fromJson(jsonDecode(stringMusicLyric))
+        : LyricModel();
   }
 
   // 播放歌曲
@@ -159,6 +168,9 @@ class MusicDetailController extends GetxController {
     // 歌曲详情
     songDetail = await MusicApi.songDetail(id);
     AudioPlayerService.to.songDetail = songDetail;
+
+    // 获取歌词
+    musicLyric = await MusicApi.lyric(id);
 
     // 音乐 url
     var musicUrl = await MusicApi.musicUrl(id);
@@ -181,6 +193,8 @@ class MusicDetailController extends GetxController {
     Storage().setJson(Constants.storageMusicDetail, songDetail);
 
     Storage().setJson(Constants.storageMusicUrl, musicUrls);
+
+    Storage().setJson(Constants.storageMusicLyric, musicLyric);
 
     _playbarController.initData();
   }

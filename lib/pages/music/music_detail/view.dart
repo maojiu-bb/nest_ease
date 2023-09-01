@@ -143,7 +143,7 @@ class MusicDetailPage extends GetView<MusicDetailController> {
         _buildInfo().sliverToBoxAdapter(),
 
         // 播放区域
-        _buildAudioPlayer().sliverToBoxAdapter()
+        _buildAudioPlayer().sliverToBoxAdapter(),
       ],
     );
   }

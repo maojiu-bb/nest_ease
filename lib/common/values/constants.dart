@@ -38,4 +38,7 @@ class Constants {
 
   // 音乐 url
   static const storageMusicUrl = 'music_url';
+
+  // 歌词
+  static const storageMusicLyric = 'music_Lyric';
 }

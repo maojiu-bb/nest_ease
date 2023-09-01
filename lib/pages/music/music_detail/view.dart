@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:nestease_cloud_music/common/index.dart';
 
 import 'index.dart';
+import 'widgets/index.dart';
 
 class MusicDetailPage extends GetView<MusicDetailController> {
   const MusicDetailPage({Key? key}) : super(key: key);
@@ -80,6 +81,37 @@ class MusicDetailPage extends GetView<MusicDetailController> {
         .paddingVertical(AppSpace.page);
   }
 
+  // 播放列表
+  Widget _buildMenuMusicList() {
+    return GetBuilder(
+        init: controller,
+        id: 'menu_list',
+        builder: (_) {
+          return <Widget>[
+            const TextWidget.title3('播放列表').paddingBottom(AppSpace.listRow),
+            <Widget>[
+              for (int i = 0; i < controller.musicList.length; i++)
+                MusicItemWidget(
+                  image: controller.musicList[i].al!.picUrl!,
+                  name: controller.musicList[i].name!,
+                  artists:
+                      controller.musicList[i].ar!.map((e) => e.name!).toList(),
+                  isActive: i == AudioPlayerService.to.currentIndex.value,
+                  onRemove: () {},
+                  onTap: () => controller.onMenuMusicTap(i),
+                ),
+            ].toListView().expanded(),
+          ]
+              .toColumn()
+              .paddingVertical(
+                AppSpace.page,
+              )
+              .paddingHorizontal(
+                AppSpace.page,
+              );
+        });
+  }
+
   // 播放区域
   Widget _buildAudioPlayer() {
     return MusicPlayer(
@@ -94,7 +126,10 @@ class MusicDetailPage extends GetView<MusicDetailController> {
       onPlayPrevious: controller.onPlayPrevious,
       onPlayChange: controller.onPlayChange,
       onPlayNext: controller.onPlayNext,
-      onMenuTap: controller.onMenuTap,
+      onMenuTap: () => Get.bottomSheet(
+        _buildMenuMusicList(),
+        backgroundColor: AppColors.background,
+      ),
       onLike: controller.onLike,
       onDownload: controller.onDownload,
     );

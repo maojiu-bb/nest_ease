@@ -1,9 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nestease_cloud_music/common/index.dart';
 import 'package:nestease_cloud_music/pages/index.dart';
-import 'package:nestease_cloud_music/pages/music/music_detail/widgets/index.dart';
 
 class MusicDetailController extends GetxController {
   MusicDetailController();
@@ -100,32 +98,14 @@ class MusicDetailController extends GetxController {
     }
   }
 
-  // 播放列表
-  void onMenuTap() {
-    Get.bottomSheet(
-      <Widget>[
-        const TextWidget.title3('播放列表').paddingBottom(AppSpace.listRow),
-        <Widget>[
-          for (int i = 0; i < musicList.length; i++)
-            MusicItemWidget(
-              image: musicList[i].al!.picUrl!,
-              name: musicList[i].name!,
-              artists: musicList[i].ar!.map((e) => e.name!).toList(),
-              isActive: i == AudioPlayerService.to.currentIndex.value,
-              onRemove: () {},
-              onTap: () {},
-            ),
-        ].toListView().expanded(),
-      ]
-          .toColumn()
-          .paddingVertical(
-            AppSpace.page,
-          )
-          .paddingHorizontal(
-            AppSpace.page,
-          ),
-      backgroundColor: AppColors.background,
+  // 播放列表点击
+  Future<void> onMenuMusicTap(int index) async {
+    AudioPlayerService.to.setCurrentIndex(index);
+    await initMusicPlayer(
+      id: musicList[AudioPlayerService.to.currentIndex.value].id!,
+      isPreviousOrNext: true,
     );
+    update(['music_detail', 'menu_list']);
   }
 
   // 喜欢

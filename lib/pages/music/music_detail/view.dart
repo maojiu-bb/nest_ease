@@ -229,10 +229,11 @@ class MusicDetailPage extends GetView<MusicDetailController> {
   Widget _buildView() {
     return <Widget>[
       // 图片信息
-      // _buildInfo(),
-
-      // 歌词
-      _buildLyric(),
+      controller.isShowLyrics == false
+          ? _buildInfo()
+          :
+          // 歌词
+          _buildLyric(),
 
       // 播放区域
       _buildAudioPlayer(),

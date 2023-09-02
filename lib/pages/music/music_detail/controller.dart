@@ -23,8 +23,14 @@ class MusicDetailController extends GetxController {
   // 歌词
   LyricModel musicLyric = LyricModel();
 
+  // 是否显示歌词
+  bool isShowLyrics = false;
+
   // 歌词
-  void onLyrics() {}
+  void onLyrics() {
+    isShowLyrics = !isShowLyrics;
+    update(['music_detail']);
+  }
 
   // 分享
   void onShare() {}

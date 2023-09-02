@@ -25,7 +25,15 @@ class MusicListController extends GetxController {
   void onMoreDetail() {}
 
   // 播放全部
-  void onPlayAll() {}
+  void onPlayAll() {
+    Get.to(
+      () => const MusicDetailPage(),
+      transition: Transition.downToUp,
+      arguments: {
+        'id': musicList[0].id,
+      },
+    );
+  }
 
   // 收藏
   void onStar() {}

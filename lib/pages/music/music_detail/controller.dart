@@ -217,7 +217,9 @@ class MusicDetailController extends GetxController {
     _loadCache();
 
     AudioPlayerService.to.audioPlayer.onPlayerComplete.listen((event) {
-      onPlayNext();
+      if (AudioPlayerService.to.isLoop.value == false) {
+        onPlayNext();
+      }
     });
   }
 

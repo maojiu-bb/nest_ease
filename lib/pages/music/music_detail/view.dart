@@ -77,6 +77,96 @@ class MusicDetailPage extends GetView<MusicDetailController> {
         .toColumn(
           mainAxisAlignment: MainAxisAlignment.center,
         )
+        .tight(height: 400)
+        .paddingHorizontal(AppSpace.page)
+        .paddingVertical(AppSpace.page);
+  }
+
+  // 歌词信息
+  Widget _buildLyric() {
+    return <Widget>[
+      // 信息
+      <Widget>[
+        ImageWidget.url(
+          controller.songDetail[0].al!.picUrl!,
+          width: 50,
+          height: 50,
+          radius: 10,
+        ),
+        const SizedBox(width: 10),
+        TextWidget.body1(
+          '${controller.songDetail[0].name} - ${controller.songDetail[0].ar!.map((e) => e.name).join('/')}',
+          overflow: TextOverflow.fade,
+        ).tight(width: 300),
+      ].toRow(),
+
+      const SizedBox(height: 15),
+
+      // 歌词
+      <Widget>[
+        for (int i = 0;
+            i <
+                LyricFormate(lyric: controller.musicLyric.lrc!.lyric!)
+                    .toList()
+                    .length;
+            i++)
+          Obx(
+            () {
+              String startTimeString =
+                  LyricFormate(lyric: controller.musicLyric.lrc!.lyric!)
+                      .toList()[i]['time'];
+              String endTimeString = (i + 1) <
+                      LyricFormate(lyric: controller.musicLyric.lrc!.lyric!)
+                          .toList()
+                          .length
+                  ? LyricFormate(lyric: controller.musicLyric.lrc!.lyric!)
+                      .toList()[i + 1]['time']
+                  : LyricFormate(lyric: controller.musicLyric.lrc!.lyric!)
+                      .toList()[i]['time'];
+
+              // 将时间字符串转换为 Duration 类型
+              Duration startTime = Duration(
+                minutes: int.parse(startTimeString.split(':')[0]),
+                seconds: int.parse(startTimeString.split(':')[1]),
+                milliseconds: int.parse(startTimeString.split(':')[2]),
+              );
+              Duration endTime = Duration(
+                minutes: int.parse(endTimeString.split(':')[0]),
+                seconds: int.parse(endTimeString.split(':')[1]),
+                milliseconds: int.parse(endTimeString.split(':')[2]),
+              );
+
+              Duration currentTime = Duration(
+                minutes: int.parse(
+                    AudioPlayerService.to.exactCurrentTime.value.split(':')[0]),
+                seconds: int.parse(
+                    AudioPlayerService.to.exactCurrentTime.value.split(':')[1]),
+                milliseconds: int.parse(
+                    AudioPlayerService.to.exactCurrentTime.value.split(':')[2]),
+              );
+
+              // 检查播放时间是否在歌词区间内
+              bool isPlaying =
+                  currentTime >= startTime && currentTime < endTime;
+
+              return TextWidget.body1(
+                LyricFormate(lyric: controller.musicLyric.lrc!.lyric!)
+                    .toList()[i]['lyric'],
+                textAlign: TextAlign.center,
+                size: 20,
+                softWrap: true,
+                color: isPlaying ? AppColors.primary : AppColors.onBackground,
+              ).paddingVertical(AppSpace.listItem);
+            },
+          ),
+      ]
+          .toListView(
+            scrollDirection: Axis.vertical,
+          )
+          .expanded(),
+    ]
+        .toColumn()
+        .tight(height: 400)
         .paddingHorizontal(AppSpace.page)
         .paddingVertical(AppSpace.page);
   }
@@ -137,15 +227,16 @@ class MusicDetailPage extends GetView<MusicDetailController> {
 
   // 主视图
   Widget _buildView() {
-    return CustomScrollView(
-      slivers: [
-        // 图片信息
-        _buildInfo().sliverToBoxAdapter(),
+    return <Widget>[
+      // 图片信息
+      // _buildInfo(),
 
-        // 播放区域
-        _buildAudioPlayer().sliverToBoxAdapter(),
-      ],
-    );
+      // 歌词
+      _buildLyric(),
+
+      // 播放区域
+      _buildAudioPlayer(),
+    ].toColumn();
   }
 
   @override

@@ -35,6 +35,12 @@ class AudioPlayerService extends GetxService {
   // total time
   RxString totalTime = '00:00'.obs;
 
+  // exact current time
+  RxString exactCurrentTime = '00:00:000'.obs;
+
+  // exact total time
+  RxString exactTotalTime = '00:00.000'.obs;
+
   Rx<Duration> duration = Duration.zero.obs;
 
   // speed
@@ -65,6 +71,7 @@ class AudioPlayerService extends GetxService {
     audioPlayer.onDurationChanged.listen((Duration audioDuration) {
       duration.value = audioDuration;
       totalTime.value = _formatTime(audioDuration);
+      exactTotalTime.value = _exactFormatTime(audioDuration);
     });
 
     audioPlayer.onPositionChanged.listen((Duration position) {
@@ -72,6 +79,7 @@ class AudioPlayerService extends GetxService {
         progress.value = position.inMilliseconds.toDouble() /
             duration.value.inMilliseconds.toDouble();
         currentTime.value = _formatTime(position);
+        exactCurrentTime.value = _exactFormatTime(position);
         if (currentTime.value == totalTime.value) {
           if (isLoop.value == false) {
             isPlaying.value = false;
@@ -169,9 +177,19 @@ class AudioPlayerService extends GetxService {
     }
   }
 
+  // time
   String _formatTime(Duration duration) {
-    final minutes = duration.inMinutes;
-    final seconds = duration.inSeconds.remainder(60);
-    return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+    final minutes = duration.inMinutes.toString().padLeft(2, '0');
+    final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    return '$minutes:$seconds';
+  }
+
+  // exact time
+  String _exactFormatTime(Duration duration) {
+    final minutes = duration.inMinutes.toString().padLeft(2, '0');
+    final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    final milliseconds =
+        (duration.inMilliseconds % 1000).toString().padLeft(3, '0');
+    return '$minutes:$seconds:$milliseconds';
   }
 }

@@ -153,7 +153,7 @@ class MusicDetailPage extends GetView<MusicDetailController> {
                 LyricFormate(lyric: controller.musicLyric.lrc!.lyric!)
                     .toList()[i]['lyric'],
                 textAlign: TextAlign.center,
-                size: 20,
+                size: isPlaying ? 26 : 20,
                 softWrap: true,
                 color: isPlaying ? AppColors.primary : AppColors.onBackground,
               ).paddingVertical(AppSpace.listItem);

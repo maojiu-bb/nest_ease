@@ -102,10 +102,12 @@ extension ExListWidget<E> on List<Widget> {
   Widget toListView({
     Key? key,
     Axis scrollDirection = Axis.vertical,
+    ScrollController? scrollController,
   }) =>
       ListView(
         key: key,
         scrollDirection: scrollDirection,
+        controller: scrollController,
         children: this,
       );
 }

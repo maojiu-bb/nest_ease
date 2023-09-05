@@ -149,6 +149,10 @@ class MusicDetailPage extends GetView<MusicDetailController> {
               bool isPlaying =
                   currentTime >= startTime && currentTime < endTime;
 
+              if (isPlaying) {
+                controller.scrollToCurrentLyric(i, 40);
+              }
+
               return TextWidget.body1(
                 LyricFormate(lyric: controller.musicLyric.lrc!.lyric!)
                     .toList()[i]['lyric'],
@@ -162,6 +166,7 @@ class MusicDetailPage extends GetView<MusicDetailController> {
       ]
           .toListView(
             scrollDirection: Axis.vertical,
+            scrollController: controller.scrollController,
           )
           .expanded(),
     ]

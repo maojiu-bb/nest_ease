@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nestease_cloud_music/common/index.dart';
 import 'package:nestease_cloud_music/pages/index.dart';
@@ -7,6 +8,9 @@ class MusicDetailController extends GetxController {
   MusicDetailController();
 
   final PlaybarController _playbarController = Get.find();
+
+  // 滚动控制器
+  final ScrollController scrollController = ScrollController();
 
   // 获取 id
   late final musicId = Get.arguments['id'];
@@ -123,6 +127,15 @@ class MusicDetailController extends GetxController {
   // 下载
   void onDownload() {}
 
+  // 调用该方法来滚动到当前播放的歌词
+  void scrollToCurrentLyric(int currentIndex, double itemHeight) {
+    scrollController.animateTo(
+      currentIndex * itemHeight,
+      duration: const Duration(milliseconds: 300), // 平滑滚动的持续时间
+      curve: Curves.easeInOut, // 可根据需求选择滚动曲线
+    );
+  }
+
   // 初始 current index
   void onSetCurrentIndex() {
     for (int i = 0; i < musicList.length; i++) {
@@ -235,8 +248,11 @@ class MusicDetailController extends GetxController {
     _initData();
   }
 
-  // @override
-  // void onClose() {
-  //   super.onClose();
-  // }
+  @override
+  void onClose() {
+    super.onClose();
+
+    // 控制器释放
+    scrollController.dispose();
+  }
 }

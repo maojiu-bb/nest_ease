@@ -149,17 +149,17 @@ class MusicDetailPage extends GetView<MusicDetailController> {
               bool isPlaying =
                   currentTime >= startTime && currentTime < endTime;
 
-              if (isPlaying) {
-                controller.scrollToCurrentLyric(i, 40);
+              if (isPlaying && i > 3) {
+                controller.scrollToCurrentLyric(i - 3, 46.5);
               }
 
               return TextWidget.body1(
                 LyricFormate(lyric: controller.musicLyric.lrc!.lyric!)
                     .toList()[i]['lyric'],
                 textAlign: TextAlign.center,
-                size: isPlaying ? 26 : 20,
-                softWrap: true,
+                size: isPlaying ? 28 : 22,
                 color: isPlaying ? AppColors.primary : AppColors.onBackground,
+                overflow: TextOverflow.fade,
               ).paddingVertical(AppSpace.listItem);
             },
           ),

@@ -67,6 +67,7 @@ class MusicDetailController extends GetxController {
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
         isPreviousOrNext: true,
       );
+      scrollToTop();
       update(['music_detail']);
     } else {
       AudioPlayerService.to.setCurrentIndex(musicList.length - 1);
@@ -74,6 +75,7 @@ class MusicDetailController extends GetxController {
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
         isPreviousOrNext: true,
       );
+      scrollToTop();
       update(['music_detail']);
     }
   }
@@ -100,6 +102,7 @@ class MusicDetailController extends GetxController {
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
         isPreviousOrNext: true,
       );
+      scrollToTop();
       update(['music_detail']);
     } else {
       AudioPlayerService.to.setCurrentIndex(0);
@@ -107,6 +110,7 @@ class MusicDetailController extends GetxController {
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
         isPreviousOrNext: true,
       );
+      scrollToTop();
       update(['music_detail']);
     }
   }
@@ -131,6 +135,15 @@ class MusicDetailController extends GetxController {
   void scrollToCurrentLyric(int currentIndex, double itemHeight) {
     scrollController.animateTo(
       currentIndex * itemHeight,
+      duration: const Duration(milliseconds: 300), // 平滑滚动的持续时间
+      curve: Curves.easeInOut, // 可根据需求选择滚动曲线
+    );
+  }
+
+  // 滚动到顶部
+  void scrollToTop() {
+    scrollController.animateTo(
+      0,
       duration: const Duration(milliseconds: 300), // 平滑滚动的持续时间
       curve: Curves.easeInOut, // 可根据需求选择滚动曲线
     );

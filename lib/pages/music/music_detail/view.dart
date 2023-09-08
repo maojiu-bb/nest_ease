@@ -55,7 +55,9 @@ class MusicDetailPage extends GetView<MusicDetailController> {
     return <Widget>[
       // 图片
       ImageWidget.url(
-        controller.songDetail[0].al!.picUrl!,
+        controller.songDetail.isNotEmpty
+            ? controller.songDetail[0].al!.picUrl!
+            : '',
         width: 320,
         height: 320,
         radius: 15,
@@ -63,13 +65,18 @@ class MusicDetailPage extends GetView<MusicDetailController> {
       const SizedBox(height: 15),
       // 文字
       TextWidget.title1(
-        controller.songDetail[0].name!,
+        controller.songDetail.isNotEmpty ? controller.songDetail[0].name! : '-',
         size: 26,
         maxLines: 1,
         overflow: TextOverflow.fade,
       ),
       TextWidget.body1(
-        controller.songDetail[0].ar!.map((e) => e.name).toList().join(' / '),
+        controller.songDetail.isNotEmpty
+            ? controller.songDetail[0].ar!
+                .map((e) => e.name)
+                .toList()
+                .join(' / ')
+            : '',
         maxLines: 1,
         overflow: TextOverflow.fade,
       ),
@@ -88,14 +95,18 @@ class MusicDetailPage extends GetView<MusicDetailController> {
       // 信息
       <Widget>[
         ImageWidget.url(
-          controller.songDetail[0].al!.picUrl!,
+          controller.songDetail.isNotEmpty
+              ? controller.songDetail[0].al!.picUrl!
+              : '',
           width: 50,
           height: 50,
           radius: 10,
         ),
         const SizedBox(width: 10),
         TextWidget.body1(
-          '${controller.songDetail[0].name} - ${controller.songDetail[0].ar!.map((e) => e.name).join('/')}',
+          controller.songDetail.isNotEmpty
+              ? '${controller.songDetail[0].name} - ${controller.songDetail[0].ar!.map((e) => e.name).join('/')}'
+              : '',
           overflow: TextOverflow.fade,
         ).tight(width: 300),
       ].toRow(),

@@ -67,7 +67,9 @@ class MusicDetailController extends GetxController {
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
         isPreviousOrNext: true,
       );
-      scrollToTop();
+      if (isShowLyrics == true) {
+        scrollToTop();
+      }
       update(['music_detail']);
     } else {
       AudioPlayerService.to.setCurrentIndex(musicList.length - 1);
@@ -75,7 +77,9 @@ class MusicDetailController extends GetxController {
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
         isPreviousOrNext: true,
       );
-      scrollToTop();
+      if (isShowLyrics == true) {
+        scrollToTop();
+      }
       update(['music_detail']);
     }
   }
@@ -102,7 +106,9 @@ class MusicDetailController extends GetxController {
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
         isPreviousOrNext: true,
       );
-      scrollToTop();
+      if (isShowLyrics == true) {
+        scrollToTop();
+      }
       update(['music_detail']);
     } else {
       AudioPlayerService.to.setCurrentIndex(0);
@@ -110,7 +116,9 @@ class MusicDetailController extends GetxController {
         id: musicList[AudioPlayerService.to.currentIndex.value].id!,
         isPreviousOrNext: true,
       );
-      scrollToTop();
+      if (isShowLyrics == true) {
+        scrollToTop();
+      }
       update(['music_detail']);
     }
   }
@@ -168,25 +176,25 @@ class MusicDetailController extends GetxController {
 
     var stringMusicLyric = Storage().getString(Constants.storageMusicLyric);
 
-    songDetail = stringSongDetail != " "
+    songDetail = stringSongDetail.isNotEmpty
         ? jsonDecode(stringSongDetail).map<SongDetailModel>((item) {
             return SongDetailModel.fromJson(item);
           }).toList()
         : [];
 
-    musicUrls = stringMusicUrl != " "
+    musicUrls = stringMusicUrl.isNotEmpty
         ? jsonDecode(stringMusicUrl).map<MusicUrlModel>((item) {
             return MusicUrlModel.fromJson(item);
           }).toList()
         : [];
 
-    musicList = stringMusicList != " "
+    musicList = stringMusicList.isNotEmpty
         ? jsonDecode(stringMusicList).map<SongListMusicModel>((item) {
             return SongListMusicModel.fromJson(item);
           }).toList()
         : [];
 
-    musicLyric = stringMusicLyric != " "
+    musicLyric = stringMusicLyric.isNotEmpty
         ? LyricModel.fromJson(jsonDecode(stringMusicLyric))
         : LyricModel();
   }
@@ -237,6 +245,8 @@ class MusicDetailController extends GetxController {
 
     // 初始 current index
     onSetCurrentIndex();
+
+    print(songDetail[0]);
 
     update(["music_detail"]);
   }

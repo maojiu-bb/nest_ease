@@ -123,31 +123,31 @@ class HomeController extends GetxController {
 
     var stringRecommendMvs = Storage().getString(Constants.storageRecommendMv);
 
-    swiperItems = stringSwiper != " "
+    swiperItems = stringSwiper.isNotEmpty
         ? jsonDecode(stringSwiper).map<KeyValueModel>((item) {
             return KeyValueModel.fromJson(item);
           }).toList()
         : [];
 
-    recommendSongs = stringRecommendSongList != " "
+    recommendSongs = stringRecommendSongList.isNotEmpty
         ? jsonDecode(stringRecommendSongList).map<SongListModel>((item) {
             return SongListModel.fromJson(item);
           }).toList()
         : [];
 
-    recommendNewSongs = stringRecommendNewSongs != " "
+    recommendNewSongs = stringRecommendNewSongs.isNotEmpty
         ? jsonDecode(stringRecommendNewSongs).map<SongsModel>((item) {
             return SongsModel.fromJson(item);
           }).toList()
         : [];
 
-    recommendDjPrograms = stringRecommendDjPrograms != " "
+    recommendDjPrograms = stringRecommendDjPrograms.isNotEmpty
         ? jsonDecode(stringRecommendDjPrograms).map<DjProgramModel>((item) {
             return DjProgramModel.fromJson(item);
           }).toList()
         : [];
 
-    recommendMvs = stringRecommendMvs != " "
+    recommendMvs = stringRecommendMvs.isNotEmpty
         ? jsonDecode(stringRecommendMvs).map<RecommendMvModel>((item) {
             return RecommendMvModel.fromJson(item);
           }).toList()
@@ -158,12 +158,12 @@ class HomeController extends GetxController {
   _initData() async {
     // 获取轮播图
     var res = await MusicApi.swiper();
-    swiperItems = res.map((item) {
-      return KeyValueModel(
-        key: item.targetId.toString(),
-        value: item.imageUrl,
-      );
-    }).toList();
+    swiperItems = res
+        .map((item) => KeyValueModel(
+              key: item.targetId.toString(),
+              value: item.imageUrl,
+            ))
+        .toList();
 
     // 获取推荐歌单
     recommendSongs = await MusicApi.songList();
@@ -194,10 +194,10 @@ class HomeController extends GetxController {
   void onTap() {}
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
-    // 加载缓存
-    _loadCache();
+
+    await _loadCache();
   }
 
   @override

@@ -62,7 +62,7 @@ class MusicListController extends GetxController {
   Future<void> _loadCache() async {
     var stringMusicList = Storage().getString(Constants.storageMusicList);
 
-    musicList = stringMusicList != " "
+    musicList = stringMusicList.isNotEmpty
         ? jsonDecode(stringMusicList).map<SongListMusicModel>((item) {
             return SongListMusicModel.fromJson(item);
           }).toList()

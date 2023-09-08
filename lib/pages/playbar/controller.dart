@@ -103,13 +103,13 @@ class PlaybarController extends GetxController {
 
     var stringMusicUrl = Storage().getString(Constants.storageMusicUrl);
 
-    songDetail = stringSongDetail != " "
+    songDetail = stringSongDetail.isNotEmpty
         ? jsonDecode(stringSongDetail).map<SongDetailModel>((item) {
             return SongDetailModel.fromJson(item);
           }).toList()
         : [];
 
-    musicUrls = stringMusicUrl != " "
+    musicUrls = stringMusicUrl.isNotEmpty
         ? jsonDecode(stringMusicUrl).map<MusicUrlModel>((item) {
             return MusicUrlModel.fromJson(item);
           }).toList()
@@ -123,9 +123,10 @@ class PlaybarController extends GetxController {
   }
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
-    _loadCache();
+    // 加载缓存
+    await _loadCache();
   }
 
   @override

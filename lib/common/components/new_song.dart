@@ -21,11 +21,8 @@ class NewSongWidget extends StatelessWidget {
   // 歌名尺寸
   final double? nameSize;
 
-  // 作者尺寸
-  final double? authorSize;
-
-  // 专辑尺寸
-  final double? albumSize;
+  // 信息尺寸
+  final double? infoSize;
 
   // 点击事件
   final VoidCallback onTap;
@@ -38,9 +35,8 @@ class NewSongWidget extends StatelessWidget {
     required this.album,
     this.fit,
     this.nameSize,
-    this.authorSize,
-    this.albumSize,
     required this.onTap,
+    this.infoSize,
   }) : super(key: key);
 
   @override
@@ -69,21 +65,12 @@ class NewSongWidget extends StatelessWidget {
 
         // 歌手专辑
         <Widget>[
-          // 歌手
+          // 信息
           TextWidget.body2(
-            author,
-            size: authorSize ?? 12,
+            '$author - $album',
+            size: infoSize ?? 12,
             overflow: TextOverflow.ellipsis,
-          ).tight(width: 70),
-
-          const SizedBox(width: 10),
-
-          // 专辑
-          TextWidget.body2(
-            album,
-            size: albumSize ?? 12,
-            overflow: TextOverflow.ellipsis,
-          ).tight(width: 100),
+          ).tight(width: 180),
         ].toRow().tight(width: 180),
       ].toColumn(
         crossAxisAlignment: CrossAxisAlignment.start,

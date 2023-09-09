@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:nestease_cloud_music/common/index.dart';
 import 'package:nestease_cloud_music/pages/index.dart';
 
-import 'index.dart';
-
 class HomePage extends GetView<HomeController> {
   const HomePage({Key? key}) : super(key: key);
 

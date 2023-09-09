@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nestease_cloud_music/common/index.dart';
-import 'package:nestease_cloud_music/pages/music/music_all_list/widgets/index.dart';
 
 import 'index.dart';
 

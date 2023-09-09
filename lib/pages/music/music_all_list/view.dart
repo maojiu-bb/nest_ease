@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nestease_cloud_music/common/index.dart';
+import 'package:nestease_cloud_music/pages/music/music_all_list/widgets/index.dart';
 
 import 'index.dart';
 
@@ -31,10 +32,25 @@ class MusicAllListPage extends GetView<MusicAllListController> {
     );
   }
 
+  // 热门歌单分类
+  Widget _buildHotMusicListCategory() {
+    return <Widget>[]
+        .toListView(
+          scrollDirection: Axis.horizontal,
+        )
+        .height(120)
+        .paddingHorizontal(AppSpace.listItem)
+        .paddingVertical(AppSpace.page)
+        .sliverToBoxAdapter();
+  }
+
   // 主视图
   Widget _buildView() {
-    return const Center(
-      child: Text("MusicAllListPage"),
+    return CustomScrollView(
+      slivers: [
+        // 热门歌单分类
+        _buildHotMusicListCategory(),
+      ],
     );
   }
 

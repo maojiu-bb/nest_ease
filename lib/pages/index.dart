@@ -3,6 +3,7 @@ library pages;
 export 'music/home/index.dart';
 export 'music/music_detail/index.dart';
 export 'music/music_list/index.dart';
+export 'music/music_all_list/index.dart';
 export 'radio/radio_detail/index.dart';
 export 'radio/radio_index/index.dart';
 export 'search/search_filter/index.dart';

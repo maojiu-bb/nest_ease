@@ -4,6 +4,7 @@ class RouteNames {
   static const musicHome = '/music_home';
   static const musicMusicDetail = '/music_music_detail';
   static const musicMusicList = '/music_music_list';
+  static const musicMusicAllList = '/music_music_all_list';
   static const radioRadioDetail = '/radio_radio_detail';
   static const radioRadioIndex = '/radio_radio_index';
   static const searchSearchFilter = '/search_search_filter';

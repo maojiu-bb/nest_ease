@@ -29,6 +29,10 @@ class RoutePages {
       page: () => const MusicListPage(),
     ),
     GetPage(
+      name: RouteNames.musicMusicAllList,
+      page: () => const MusicAllListPage(),
+    ),
+    GetPage(
       name: RouteNames.radioRadioDetail,
       page: () => const RadioDetailPage(),
     ),

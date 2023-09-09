@@ -4,8 +4,16 @@
         page: () => const HomePage(),
       ),
       GetPage(
+        name: RouteNames.musicMusicAllList,
+        page: () => const MusicAllListPage(),
+      ),
+      GetPage(
         name: RouteNames.musicMusicDetail,
         page: () => const MusicDetailPage(),
+      ),
+      GetPage(
+        name: RouteNames.musicMusicDetailWidgets,
+        page: () => const WidgetsPage(),
       ),
       GetPage(
         name: RouteNames.musicMusicList,

@@ -1,5 +1,7 @@
 static const musicHome = '/music_home';
+static const musicMusicAllList = '/music_music_all_list';
 static const musicMusicDetail = '/music_music_detail';
+static const musicMusicDetailWidgets = '/music_music_detail_widgets';
 static const musicMusicList = '/music_music_list';
 static const playbar = '/playbar';
 static const radioRadioDetail = '/radio_radio_detail';

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nestease_cloud_music/common/index.dart';
@@ -84,25 +83,15 @@ class MusicAllListController extends GetxController
       hotCategoryDetail.addAll(result);
     }
 
-    Storage().setJson(Constants.storageHotCategoryDetail, hotCategoryDetail);
-
     return result.isEmpty;
   }
 
   Future<void> _loadCache() async {
     var cachedHotCategory = Storage().getJson(Constants.storageHotCategory);
-    var cachedHotCategoryDetail =
-        Storage().getString(Constants.storageHotCategoryDetail);
 
     hotCategory = cachedHotCategory != null
         ? List<MusicListHotCategory>.from(cachedHotCategory
             .map((item) => MusicListHotCategory.fromJson(item)))
-        : [];
-    hotCategoryDetail = cachedHotCategoryDetail.isNotEmpty
-        ? jsonDecode(cachedHotCategoryDetail)
-            .map<MusciListHotCategoryDetail>((item) {
-            return MusciListHotCategoryDetail.fromJson(item);
-          }).toList()
         : [];
   }
 

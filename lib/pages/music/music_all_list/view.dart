@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nestease_cloud_music/common/index.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'index.dart';
 
@@ -65,29 +66,33 @@ class MusicAllListPage extends GetView<MusicAllListController> {
 
   // 歌单
   Widget _buildMusciList() {
-    return <Widget>[
-      for (int i = 0; i < controller.hotCategoryDetail.length; i++)
-        SongListWidget(
-          isVertical: true,
-          imgUrl: controller.hotCategoryDetail[i].coverImgUrl!,
-          text: controller.hotCategoryDetail[i].name!,
-          onPlay: () => {},
-          onTap: () => {},
-        ),
-    ]
-        .toWrap()
-        .paddingVertical(AppSpace.page)
-        .paddingLeft(9)
-        .sliverToBoxAdapter();
+    return GetBuilder<MusicAllListController>(
+        id: 'music_list_view',
+        builder: (controller) {
+          return SmartRefresher(
+            controller: controller.refreshController,
+            enablePullUp: true, // 启用上拉加载
+            onRefresh: controller.onRefresh, // 下拉刷新回调
+            onLoading: controller.onLoading, // 上拉加载回调
+            child: <Widget>[
+              for (int i = 0; i < controller.hotCategoryDetail.length; i++)
+                SongListWidget(
+                  isVertical: true,
+                  imgUrl: controller.hotCategoryDetail[i].coverImgUrl!,
+                  text: controller.hotCategoryDetail[i].name!,
+                  onPlay: () => {},
+                  onTap: () => {},
+                ),
+            ].toWrap().paddingVertical(AppSpace.page).paddingLeft(9),
+          );
+        });
   }
 
   // 主视图
   Widget _buildView() {
-    return CustomScrollView(
-      slivers: [
-        _buildMusciList(),
-      ],
-    );
+    return <Widget>[
+      _buildMusciList().expanded(),
+    ].toRow();
   }
 
   @override

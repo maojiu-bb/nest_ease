@@ -109,7 +109,7 @@ class SongListWidget extends StatelessWidget {
     ]
         .toColumn()
         .width(115)
-        .height(160)
+        .height(165)
         .paddingHorizontal(
           AppSpace.listView,
         )

@@ -128,7 +128,9 @@ class MusciListHotCategoryDetail {
       recommendInfo: json['recommendInfo'] as dynamic,
       socialPlaylistCover: json['socialPlaylistCover'] as dynamic,
       recommendText: json['recommendText'] as dynamic,
-      coverText: json['coverText'] as List<String>?,
+      coverText: (json['coverText'] as List<dynamic>?)
+          ?.map<String>((e) => e.toString())
+          .toList(),
       relateResType: json['relateResType'] as String?,
       relateResId: json['relateResId'] as dynamic,
       shareCount: json['shareCount'] as int?,

@@ -1,4 +1,5 @@
 import 'package:nestease_cloud_music/common/index.dart';
+import 'package:nestease_cloud_music/common/models/music/music_list_hot_category/music_list_hot_category.dart';
 
 class MusicApi {
   // 获取轮播图
@@ -96,5 +97,17 @@ class MusicApi {
     var lyricResult = LyricModel.fromJson(res.data);
 
     return lyricResult;
+  }
+
+  // 热门歌单分类
+  static Future<List<MusicListHotCategory>> hotCategory() async {
+    var res = await DioService.to.get(
+      '/playlist/hot',
+    );
+    List<MusicListHotCategory> categoryList = [];
+    for (var item in res.data['tags']) {
+      categoryList.add(MusicListHotCategory.fromJson(item));
+    }
+    return categoryList;
   }
 }

@@ -41,4 +41,7 @@ class Constants {
 
   // 歌词
   static const storageMusicLyric = 'music_Lyric';
+
+  // hot category
+  static const storageHotCategory = 'hot_category';
 }

@@ -28,28 +28,45 @@ class MusicAllListPage extends GetView<MusicAllListController> {
         color: AppColors.onBackground,
       ),
       centerTitle: true,
+      // 底部
+      bottom: TabBar(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpace.page,
+        ), // 设置左右间距为16
+        isScrollable: true,
+        indicatorSize: TabBarIndicatorSize.label,
+        indicatorColor: AppColors.primary,
+        splashBorderRadius: BorderRadius.circular(
+          AppRadius.button,
+        ),
+        tabs: controller.hotCategory
+            .map(
+              (element) => TextWidget.title3(
+                element.name!,
+                color: AppColors.onBackground,
+              ),
+            )
+            .toList(),
+        controller: controller.tabController,
+        onTap: (value) {},
+      ),
+      actions: [
+        ButtonWidget.icon(
+          Icon(
+            Icons.more_horiz_rounded,
+            size: 30,
+            color: AppColors.onBackground,
+          ),
+          onTap: () {},
+        ),
+      ],
     );
-  }
-
-  // 热门歌单分类
-  Widget _buildHotMusicListCategory() {
-    return <Widget>[]
-        .toListView(
-          scrollDirection: Axis.horizontal,
-        )
-        .height(120)
-        .paddingHorizontal(AppSpace.listItem)
-        .paddingVertical(AppSpace.page)
-        .sliverToBoxAdapter();
   }
 
   // 主视图
   Widget _buildView() {
-    return CustomScrollView(
-      slivers: [
-        // 热门歌单分类
-        _buildHotMusicListCategory(),
-      ],
+    return const CustomScrollView(
+      slivers: [],
     );
   }
 

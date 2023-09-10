@@ -23,6 +23,9 @@ class SongListWidget extends StatelessWidget {
   // 播放函数
   final VoidCallback onPlay;
 
+  // 垂直边距
+  final bool? isVertical;
+
   // 点击
   final VoidCallback onTap;
 
@@ -35,6 +38,7 @@ class SongListWidget extends StatelessWidget {
     this.fit,
     required this.onPlay,
     required this.onTap,
+    this.isVertical = false,
   }) : super(key: key);
 
   @override
@@ -109,6 +113,7 @@ class SongListWidget extends StatelessWidget {
         .paddingHorizontal(
           AppSpace.listView,
         )
+        .paddingVertical(isVertical == true ? AppSpace.page : 0)
         .onTap(onTap);
   }
 }

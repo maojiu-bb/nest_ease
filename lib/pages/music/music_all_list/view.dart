@@ -48,7 +48,7 @@ class MusicAllListPage extends GetView<MusicAllListController> {
             )
             .toList(),
         controller: controller.tabController,
-        onTap: (value) {},
+        onTap: controller.onTabTap,
       ),
       actions: [
         ButtonWidget.icon(
@@ -63,10 +63,30 @@ class MusicAllListPage extends GetView<MusicAllListController> {
     );
   }
 
+  // 歌单
+  Widget _buildMusciList() {
+    return <Widget>[
+      for (int i = 0; i < controller.hotCategoryDetail.length; i++)
+        SongListWidget(
+          isVertical: true,
+          imgUrl: controller.hotCategoryDetail[i].coverImgUrl!,
+          text: controller.hotCategoryDetail[i].name!,
+          onPlay: () => {},
+          onTap: () => {},
+        ),
+    ]
+        .toWrap()
+        .paddingVertical(AppSpace.page)
+        .paddingLeft(9)
+        .sliverToBoxAdapter();
+  }
+
   // 主视图
   Widget _buildView() {
-    return const CustomScrollView(
-      slivers: [],
+    return CustomScrollView(
+      slivers: [
+        _buildMusciList(),
+      ],
     );
   }
 

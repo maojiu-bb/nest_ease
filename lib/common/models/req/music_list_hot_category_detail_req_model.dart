@@ -15,6 +15,6 @@ class MusciListHotCategoryDetailRequest {
         'limit': limit ?? 15,
         'order': order ?? 'hot',
         'cat': cat,
-        'page': page,
+        'offset': page * (limit ?? 15),
       };
 }

@@ -114,12 +114,8 @@ class MusicApi {
   // 获取歌单分类下的歌曲
   static Future<List<MusciListHotCategoryDetail>> hotCategoryDetail(
       MusciListHotCategoryDetailRequest request) async {
-    var res = await DioService.to.get('/top/playlist', params: {
-      'limit': request.limit,
-      'order': request.order,
-      'cat': request.cat,
-      'offset': request.page * (request.limit ?? 15),
-    });
+    var res =
+        await DioService.to.get('/top/playlist', params: request.toJson());
     List<MusciListHotCategoryDetail> categoryDetailList = [];
     for (var item in res.data['playlists']) {
       categoryDetailList.add(MusciListHotCategoryDetail.fromJson(item));

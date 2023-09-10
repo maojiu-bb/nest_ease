@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nestease_cloud_music/common/index.dart';
+import 'package:nestease_cloud_music/common/models/music/musci_list_hot_category_detail/musci_list_hot_category_detail.dart';
 
 class MusicAllListController extends GetxController
     with GetTickerProviderStateMixin {
@@ -9,11 +12,33 @@ class MusicAllListController extends GetxController
 
   List<MusicListHotCategory> hotCategory = [];
 
+  // 分页页码
+  final int page = 1;
+
+  // 歌单列表
+  List<MusciListHotCategoryDetail> hotCategoryDetail = [];
+
+  // tab点击事件
+  Future<void> onTabTap(int value) async {
+    await _loadHotCategoryDetail(cat: hotCategory[value].name!, page: page);
+
+    update(["music_all_list"]);
+  }
+
   Future<void> _loadCache() async {
     var cachedHotCategory = Storage().getJson(Constants.storageHotCategory);
+    var cachedHotCategoryDetail =
+        Storage().getString(Constants.storageHotCategoryDetail);
+
     hotCategory = cachedHotCategory != null
         ? List<MusicListHotCategory>.from(cachedHotCategory
             .map((item) => MusicListHotCategory.fromJson(item)))
+        : [];
+    hotCategoryDetail = cachedHotCategoryDetail.isNotEmpty
+        ? jsonDecode(cachedHotCategoryDetail)
+            .map<MusciListHotCategoryDetail>((item) {
+            return MusciListHotCategoryDetail.fromJson(item);
+          }).toList()
         : [];
   }
 
@@ -23,8 +48,19 @@ class MusicAllListController extends GetxController
     await _loadCache();
   }
 
+  // 加载分类详情歌单
+  Future<void> _loadHotCategoryDetail(
+      {required String cat, required int page}) async {
+    hotCategoryDetail = await MusicApi.hotCategoryDetail(
+        MusciListHotCategoryDetailRequest(cat: cat, page: page));
+
+    Storage().setJson(Constants.storageHotCategoryDetail, hotCategoryDetail);
+  }
+
   _initData() async {
     hotCategory = await MusicApi.hotCategory();
+
+    await _loadHotCategoryDetail(cat: hotCategory[0].name!, page: page);
 
     Storage().setJson(Constants.storageHotCategory, hotCategory);
 

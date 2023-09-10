@@ -44,4 +44,7 @@ class Constants {
 
   // hot category
   static const storageHotCategory = 'hot_category';
+
+  // hot category detail
+  static const storageHotCategoryDetail = 'hot_category_detail';
 }

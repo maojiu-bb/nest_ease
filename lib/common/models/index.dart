@@ -21,4 +21,5 @@ export './radio/radio_category_item_model.dart';
 export './mv/recommend_mv_model/recommend_mv_model.dart';
 
 export './req/song_list_req_model.dart';
+export './req/music_list_hot_category_detail_req_model.dart';
 // export './xxxx.dart';

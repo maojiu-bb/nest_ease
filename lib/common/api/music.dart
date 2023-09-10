@@ -1,5 +1,5 @@
 import 'package:nestease_cloud_music/common/index.dart';
-import 'package:nestease_cloud_music/common/models/music/music_list_hot_category/music_list_hot_category.dart';
+import 'package:nestease_cloud_music/common/models/music/musci_list_hot_category_detail/musci_list_hot_category_detail.dart';
 
 class MusicApi {
   // 获取轮播图
@@ -109,5 +109,21 @@ class MusicApi {
       categoryList.add(MusicListHotCategory.fromJson(item));
     }
     return categoryList;
+  }
+
+  // 获取歌单分类下的歌曲
+  static Future<List<MusciListHotCategoryDetail>> hotCategoryDetail(
+      MusciListHotCategoryDetailRequest request) async {
+    var res = await DioService.to.get('/top/playlist', params: {
+      'limit': request.limit,
+      'order': request.order,
+      'cat': request.cat,
+      'offset': request.page * (request.limit ?? 15),
+    });
+    List<MusciListHotCategoryDetail> categoryDetailList = [];
+    for (var item in res.data['playlists']) {
+      categoryDetailList.add(MusciListHotCategoryDetail.fromJson(item));
+    }
+    return categoryDetailList;
   }
 }

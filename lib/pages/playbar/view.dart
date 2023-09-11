@@ -21,10 +21,10 @@ class PlaybarPage extends GetView<PlaybarController> {
         isPlaying: AudioPlayerService.to.isPlaying,
         image: AudioPlayerService.to.songDetail.isNotEmpty
             ? AudioPlayerService.to.songDetail[0].al!.picUrl!
-            : '',
+            : controller.songDetail[0].al!.picUrl!,
         name: AudioPlayerService.to.songDetail.isNotEmpty
             ? AudioPlayerService.to.songDetail[0].name!
-            : '-',
+            : controller.songDetail[0].name!,
         onPlay: controller.onPlayChanged,
         onNext: controller.onPlayNext,
         onPrevious: controller.onPlayPrevious,

@@ -33,6 +33,16 @@ class MusicAllListController extends GetxController
     update(["music_all_list"]);
   }
 
+  // 前往歌单详情
+  void onMusciListDetail(int index) {
+    Get.toNamed(
+      RouteNames.musicMusicList,
+      arguments: {
+        'songList': hotCategoryDetail[index],
+      },
+    );
+  }
+
   // 上拉载入新商品
   void onLoading() async {
     if (hotCategoryDetail.isNotEmpty) {

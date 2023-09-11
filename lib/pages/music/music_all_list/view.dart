@@ -81,7 +81,7 @@ class MusicAllListPage extends GetView<MusicAllListController> {
                   imgUrl: controller.hotCategoryDetail[i].coverImgUrl!,
                   text: controller.hotCategoryDetail[i].name!,
                   onPlay: () => {},
-                  onTap: () => {},
+                  onTap: () => controller.onMusciListDetail(i),
                 ),
             ].toWrap().paddingVertical(AppSpace.page).paddingLeft(9),
           );

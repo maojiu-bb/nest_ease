@@ -50,7 +50,7 @@ class MusicListPage extends GetView<MusicListController> {
     return <Widget>[
       // 图片
       ImageWidget.url(
-        controller.songList.picUrl,
+        controller.imageUrl ?? '',
         width: 160,
         height: 160,
         fit: BoxFit.fill,

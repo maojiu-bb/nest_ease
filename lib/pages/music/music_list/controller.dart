@@ -12,6 +12,9 @@ class MusicListController extends GetxController {
   // appbar title
   final title = Get.arguments['appbar_title'];
 
+  // 图片
+  String? imageUrl;
+
   // music list
   List<SongListMusicModel> musicList = [];
 
@@ -58,6 +61,15 @@ class MusicListController extends GetxController {
   // like
   void onLike() {}
 
+  // 判断 imageUrl
+  void judgeImageUrl() {
+    if (songList is SongListModel) {
+      imageUrl = (songList as SongListModel).picUrl;
+    } else if (songList is MusciListHotCategoryDetail) {
+      imageUrl = (songList as MusciListHotCategoryDetail).coverImgUrl;
+    }
+  }
+
   // 读取缓存
   Future<void> _loadCache() async {
     var stringMusicList = Storage().getString(Constants.storageMusicList);
@@ -89,6 +101,7 @@ class MusicListController extends GetxController {
     super.onInit();
     // 读取缓存
     _loadCache();
+    judgeImageUrl();
   }
 
   @override
